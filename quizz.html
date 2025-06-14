@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Culture Générale</title>
+  <style>
+    body {
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #2c5364 80%);
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      color: #00ffe7;
+      margin-bottom: 20px;
+      text-shadow: 0 0 12px #00ffe7, 0 0 40px #0ff;
+      font-size: 2.5em;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .card {
+      background: rgba(20, 30, 60, 0.95);
+      border-radius: 18px;
+      box-shadow: 0 0 24px #00ffe7, 0 0 4px #fff3;
+      padding: 28px;
+      margin: 18px;
+      width: 340px;
+      border: 2px solid #00ffe7;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(120deg, #00ffe7 0%, #ff00cc 100%);
+      opacity: 0.08;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: scale(1.03) rotate(-1deg);
+      box-shadow: 0 0 40px #00ffe7, 0 0 8px #ff00cc;
+    }
+
+    .question {
+      font-weight: bold;
+      margin-bottom: 18px;
+      color: #fff;
+      font-size: 1.15em;
+      text-shadow: 0 0 6px #00ffe7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffe7, 0 0 2px #ff00cc;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      outline: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .answers button:hover:not(:disabled) {
+      background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+      transform: scale(1.04);
+      box-shadow: 0 0 20px #ff00cc, 0 0 8px #00ffe7;
+    }
+
+    .answers button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(0.5);
+    }
+
+    .result {
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-shadow: 0 0 8px #fff, 0 0 16px #00ffe7;
+      min-height: 1.5em;
+      position: relative;
+      z-index: 1;
+    }
+
+    #scoreboard {
+      margin: 22px 0;
+      font-size: 1.3em;
+      color: #00ffe7;
+      text-shadow: 0 0 10px #00ffe7, 0 0 20px #ff00cc;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    #restart {
+      padding: 12px 28px;
+      background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 28px;
+      font-size: 1.1em;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      font-weight: bold;
+      box-shadow: 0 0 16px #ff00cc, 0 0 8px #00ffe7;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    #restart:hover {
+      background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
+      box-shadow: 0 0 32px #00ffe7, 0 0 16px #ff00cc;
+      transform: scale(1.05);
+    }
+
+    /* Import Orbitron font for a futuristic look */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    .menu-btn {
+      padding: 12px 24px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffe7, 0 0 2px #ff00cc;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      outline: none;
+      display: inline-block;
+    }
+
+    .menu-btn:hover {
+      background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+      transform: scale(1.04);
+      box-shadow: 0 0 20px #ff00cc, 0 0 8px #00ffe7;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 Quiz Culture Générale</h1>
+  <div id="scoreboard">Score : 0 / 3</div>
+
+  <button id="restart" onclick="restartQuiz()">Recommencer</button>
+  <button id="back" onclick="goBack()" style="margin-top:12px;padding:10px 24px;background:linear-gradient(90deg,#00ffe7 0%,#ff00cc 100%);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1em;font-family:'Orbitron','Arial',sans-serif;font-weight:bold;box-shadow:0 0 10px #00ffe7,0 0 2px #ff00cc;transition:background 0.2s,box-shadow 0.2s,transform 0.2s;">
+    Retour au menu
+  </button>
+
+  <div id="menu" style="display:none;">
+    <button class="menu-btn" onclick="startQuiz('culture')">Culture générale</button>
+    <button class="menu-btn" onclick="startQuiz('islam')">Culture islamique</button>
+    <button class="menu-btn" onclick="startQuiz('histoire')">Histoire</button>
+    <button class="menu-btn" onclick="startQuiz('geo')">Géographie</button>
+    <button class="menu-btn" onclick="startQuiz('autres')">Autres</button>
+  </div>
+
+  <script>
+const questionsByCategory = {
+  culture: [
+    { question: "Quelle est la capitale du Canada ?", answers: ["Toronto", "Ottawa", "Vancouver"], correct: "Ottawa" },
+    { question: "Quel est le plus grand pays du monde ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
+    { question: "Combien de couleurs sur le drapeau français ?", answers: ["2", "3", "4"], correct: "3" },
+    { question: "Quel est l’animal terrestre le plus rapide ?", answers: ["Guépard", "Lion", "Antilope"], correct: "Guépard" },
+    { question: "Quel est le plus haut sommet du monde ?", answers: ["Mont Blanc", "K2", "Everest"], correct: "Everest" },
+    { question: "Qui a peint la Joconde ?", answers: ["Vincent Van Gogh", "Léonard de Vinci", "Pablo Picasso"], correct: "Léonard de Vinci" },
+    { question: "Quelle planète est la plus proche du Soleil ?", answers: ["Vénus", "Mercure", "Mars"], correct: "Mercure" },
+    { question: "En quelle année l’homme a-t-il marché sur la Lune ?", answers: ["1969", "1972", "1959"], correct: "1969" },
+    { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
+    { question: "Combien y a-t-il de zéros dans un milliard ?", answers: ["6", "9", "12"], correct: "9" }
+  ],
+  islam: [
+    { question: "Combien de prières obligatoires par jour en islam ?", answers: ["3", "5", "7"], correct: "5" },
+    { question: "Quel est le livre sacré de l’islam ?", answers: ["Bible", "Torah", "Coran"], correct: "Coran" },
+    { question: "Dans quelle ville est né le Prophète Mohammed ?", answers: ["Médine", "La Mecque", "Jérusalem"], correct: "La Mecque" },
+    { question: "Quel mois les musulmans jeûnent-ils ?", answers: ["Ramadan", "Chawwal", "Mouharram"], correct: "Ramadan" },
+    { question: "Combien de sourates dans le Coran ?", answers: ["114", "99", "120"], correct: "114" },
+    { question: "Quel est le premier pilier de l’islam ?", answers: ["La prière", "La profession de foi", "Le jeûne"], correct: "La profession de foi" },
+    { question: "Quel prophète a construit l’arche ?", answers: ["Moussa", "Nouh", "Ibrahim"], correct: "Nouh" },
+    { question: "Dans quelle ville se trouve la mosquée Al-Aqsa ?", answers: ["La Mecque", "Médine", "Jérusalem"], correct: "Jérusalem" },
+    { question: "Comment s’appelle le dernier prophète de l’islam ?", answers: ["Issa", "Moussa", "Mohammed"], correct: "Mohammed" },
+    { question: "Combien de fois par an a lieu le pèlerinage (Hajj) ?", answers: ["1", "2", "3"], correct: "1" }
+  ],
+  histoire: [
+    { question: "En quelle année a eu lieu la Révolution française ?", answers: ["1789", "1848", "1914"], correct: "1789" },
+    { question: "Qui était le premier président des États-Unis ?", answers: ["Lincoln", "Washington", "Jefferson"], correct: "Washington" },
+    { question: "Quel empire a construit le Colisée ?", answers: ["Grec", "Romain", "Égyptien"], correct: "Romain" },
+    { question: "Qui a découvert l’Amérique ?", answers: ["Christophe Colomb", "Vasco de Gama", "Magellan"], correct: "Christophe Colomb" },
+    { question: "Quel roi fut surnommé le Roi Soleil ?", answers: ["Louis XIV", "Louis XVI", "François Ier"], correct: "Louis XIV" },
+    { question: "En quelle année a commencé la Première Guerre mondiale ?", answers: ["1914", "1939", "1815"], correct: "1914" },
+    { question: "Qui a inventé l’imprimerie ?", answers: ["Gutenberg", "Edison", "Pasteur"], correct: "Gutenberg" },
+    { question: "Où se trouve la pyramide de Khéops ?", answers: ["Gizeh", "Louxor", "Saqqarah"], correct: "Gizeh" },
+    { question: "Quel pays a construit la Grande Muraille ?", answers: ["Chine", "Japon", "Inde"], correct: "Chine" },
+    { question: "Qui était Cléopâtre ?", answers: ["Reine d’Égypte", "Impératrice de Rome", "Reine de Perse"], correct: "Reine d’Égypte" }
+  ],
+  geo: [
+    { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
+    { question: "Combien de continents existe-t-il ?", answers: ["5", "6", "7"], correct: "7" },
+    { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Antarctique"], correct: "Antarctique" },
+    { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazon", "Yangtsé"], correct: "Amazon" },
+    { question: "Dans quel pays se trouve le Kilimandjaro ?", answers: ["Kenya", "Tanzanie", "Afrique du Sud"], correct: "Tanzanie" },
+    { question: "Quelle est la capitale du Brésil ?", answers: ["Rio", "Brasilia", "São Paulo"], correct: "Brasilia" },
+    { question: "Quel est le plus grand lac d’Afrique ?", answers: ["Victoria", "Tanganyika", "Malawi"], correct: "Victoria" },
+    { question: "Quel pays a la plus grande superficie ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
+    { question: "Quel est le plus haut sommet d’Europe ?", answers: ["Mont Blanc", "Elbrouz", "Matterhorn"], correct: "Elbrouz" },
+    { question: "Quel est le plus grand pays d’Amérique du Sud ?", answers: ["Argentine", "Brésil", "Colombie"], correct: "Brésil" }
+  ],
+  autres: [
+    { question: "Quel est l’élément chimique \"O\" ?", answers: ["Or", "Oxygène", "Osmium"], correct: "Oxygène" },
+    { question: "Quel est le plus grand mammifère marin ?", answers: ["Baleine bleue", "Orque", "Dauphin"], correct: "Baleine bleue" },
+    { question: "Quel est le plus grand oiseau ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
+    { question: "Combien de côtés a un hexagone ?", answers: ["5", "6", "8"], correct: "6" },
+    { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Antoine de Saint-Exupéry", "Jules Verne"], correct: "Antoine de Saint-Exupéry" },
+    { question: "Quel est le symbole chimique du fer ?", answers: ["Fe", "Ir", "Fr"], correct: "Fe" },
+    { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant" },
+    { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
+    { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
+    { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" }
+  ]
+};
+
+// Récupère la catégorie depuis l'URL
+function getCategory() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('cat') || 'culture';
+}
+
+const cat = getCategory();
+const allQuestions = questionsByCategory[cat] || questionsByCategory['culture'];
+
+// Mélange et sélectionne 10 questions au hasard (ou moins si pas assez)
+function getRandomQuestions(arr, n) {
+  const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, Math.min(n, arr.length));
+}
+
+const questions = getRandomQuestions(allQuestions, 10);
+let score = 0;
+let current = 0;
+const scoreboard = document.getElementById('scoreboard');
+const quizDiv = document.createElement('div');
+document.body.insertBefore(quizDiv, document.getElementById('restart'));
+
+// Change le titre selon la catégorie
+const titles = {
+  culture: "🧠 Quiz Culture Générale",
+  islam: "🕌 Quiz Culture Islamique",
+  histoire: "📜 Quiz Histoire",
+  geo: "🌍 Quiz Géographie",
+  autres: "⭐ Quiz Autres"
+};
+document.querySelector('h1').textContent = titles[cat] || titles['culture'];
+
+function showQuestion() {
+  if (current >= questions.length) {
+    quizDiv.innerHTML = `<div class="result">Quiz terminé !<br>Votre score : ${score} / ${questions.length}</div>`;
+    document.getElementById('restart').style.display = "inline-block";
+    return;
+  }
+  const q = questions[current];
+  quizDiv.innerHTML = `
+    <div class="card">
+      <div class="question">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(ans => `<button>${ans}</button>`).join('')}
+      </div>
+      <div class="result"></div>
+    </div>
+  `;
+  document.querySelectorAll('.answers button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const result = quizDiv.querySelector('.result');
+      if (btn.textContent === q.correct) {
+        result.textContent = "✅ Bonne réponse !";
+        result.style.color = "green";
+        score++;
+      } else {
+        result.textContent = "❌ Mauvaise réponse.";
+        result.style.color = "red";
+      }
+      scoreboard.textContent = `Score : ${score} / ${questions.length}`;
+      document.querySelectorAll('.answers button').forEach(b => b.disabled = true);
+      setTimeout(() => {
+        current++;
+        showQuestion();
+      }, 1000);
+    });
+  });
+}
+
+function restartQuiz() {
+  window.location.href = "index.html";
+}
+
+function goBack() {
+  window.location.href = "index.html";
+}
+
+function startQuiz(cat) {
+  window.location.href = `quizz.html?cat=${cat}`;
+}
+
+// Met à jour le score initial
+scoreboard.textContent = `Score : 0 / ${questions.length}`;
+showQuestion();
+  </script>
+</body>
+</html>

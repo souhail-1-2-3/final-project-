@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #2c5364 80%);
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-card {
+      background: rgba(255,255,255,0.10);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 350px;
+    }
+    h1 {
+      color: #00ffe7;
+      margin-bottom: 30px;
+      text-shadow: 0 0 12px #00ffe7, 0 0 40px #0ff;
+      font-size: 2em;
+      letter-spacing: 2px;
+    }
+    .menu-btn {
+      display: block;
+      width: 100%;
+      margin: 15px 0;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffe7, 0 0 2px #ff00cc;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .menu-btn:hover {
+      background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+      transform: scale(1.04);
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-card">
+    <h1>Choisissez une catégorie</h1>
+    <button class="menu-btn" onclick="startQuiz('culture')">Culture générale</button>
+    <button class="menu-btn" onclick="startQuiz('islam')">Culture islamique</button>
+    <button class="menu-btn" onclick="startQuiz('histoire')">Histoire</button>
+    <button class="menu-btn" onclick="startQuiz('geo')">Géographie</button>
+    <button class="menu-btn" onclick="startQuiz('autres')">Autres</button>
+  </div>
+  <script>
+    function startQuiz(cat) {
+      window.location.href = `quizz.html?cat=${cat}`;
+    }
+  </script>
+  <script>
+    const quizzes = {
+      culture: [
+        { question: "Quelle est la capitale du Canada ?", answers: ["Toronto", "Ottawa", "Vancouver"], correct: "Ottawa" },
+        { question: "Quel est le plus grand pays du monde ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
+        { question: "Combien de couleurs sur le drapeau français ?", answers: ["2", "3", "4"], correct: "3" },
+        { question: "Quel est l’animal terrestre le plus rapide ?", answers: ["Guépard", "Lion", "Antilope"], correct: "Guépard" },
+        { question: "Quel est le plus haut sommet du monde ?", answers: ["Mont Blanc", "K2", "Everest"], correct: "Everest" },
+        { question: "Qui a peint la Joconde ?", answers: ["Vincent Van Gogh", "Léonard de Vinci", "Pablo Picasso"], correct: "Léonard de Vinci" },
+        { question: "Quelle planète est la plus proche du Soleil ?", answers: ["Vénus", "Mercure", "Mars"], correct: "Mercure" },
+        { question: "En quelle année l’homme a-t-il marché sur la Lune ?", answers: ["1969", "1972", "1959"], correct: "1969" },
+        { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
+        { question: "Combien y a-t-il de zéros dans un milliard ?", answers: ["6", "9", "12"], correct: "9" },
+        { question: "Quel animal est le symbole de la sagesse ?", answers: ["Chouette", "Lion", "Serpent"], correct: "Chouette" },
+        { question: "Quel pays a inventé les Jeux Olympiques ?", answers: ["Italie", "Grèce", "France"], correct: "Grèce" },
+        { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazon", "Yangtsé"], correct: "Amazon" },
+        { question: "Combien de côtés a un hexagone ?", answers: ["5", "6", "8"], correct: "6" },
+        { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Antoine de Saint-Exupéry", "Jules Verne"], correct: "Antoine de Saint-Exupéry" },
+        { question: "Quelle est la langue la plus parlée au monde ?", answers: ["Anglais", "Espagnol", "Mandarin"], correct: "Mandarin" },
+        { question: "Quel est le symbole chimique du fer ?", answers: ["Fe", "Ir", "Fr"], correct: "Fe" },
+        { question: "Dans quel pays se trouve la Tour de Pise ?", answers: ["Espagne", "Italie", "France"], correct: "Italie" },
+        { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Antarctique"], correct: "Antarctique" },
+        { question: "Combien de joueurs dans une équipe de football ?", answers: ["9", "10", "11"], correct: "11" },
+        { question: "Quel est l’élément chimique \"O\" ?", answers: ["Or", "Oxygène", "Osmium"], correct: "Oxygène" },
+        { question: "Quelle est la capitale de l’Australie ?", answers: ["Melbourne", "Canberra", "Sydney"], correct: "Canberra" },
+        { question: "Combien de continents existe-t-il ?", answers: ["5", "6", "7"], correct: "7" },
+        { question: "Quel est le plus grand lac d’Afrique ?", answers: ["Victoria", "Tanganyika", "Malawi"], correct: "Victoria" },
+        { question: "Quel est le plus grand mammifère marin ?", answers: ["Baleine bleue", "Orque", "Dauphin"], correct: "Baleine bleue" },
+        { question: "Quel pays a la plus grande population ?", answers: ["Inde", "Chine", "États-Unis"], correct: "Chine" },
+        { question: "Quel est le plus petit pays du monde ?", answers: ["Monaco", "Vatican", "Malte"], correct: "Vatican" },
+        { question: "Quel est l’inventeur de l’ampoule électrique ?", answers: ["Edison", "Tesla", "Franklin"], correct: "Edison" },
+        { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
+        { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" },
+        { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
+        { question: "Quel est le plus grand pays d’Afrique ?", answers: ["Algérie", "Nigeria", "Égypte"], correct: "Algérie" },
+        { question: "Quel est le plus grand port de France ?", answers: ["Le Havre", "Marseille", "Bordeaux"], correct: "Marseille" },
+        { question: "Quel est le plus grand désert chaud ?", answers: ["Sahara", "Gobi", "Kalahari"], correct: "Sahara" },
+        { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant" },
+        { question: "Quel est le plus grand oiseau ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
+        { question: "Quel est le plus grand pays d’Amérique du Sud ?", answers: ["Argentine", "Brésil", "Colombie"], correct: "Brésil" },
+        { question: "Quel est le plus grand fleuve d’Europe ?", answers: ["Danube", "Volga", "Rhin"], correct: "Volga" },
+        { question: "Quel est le plus grand état des États-Unis ?", answers: ["Texas", "Alaska", "Californie"], correct: "Alaska" },
+        { question: "Quel est le plus grand océan ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" }
+      ],
+      islam: [
+        { question: "Combien de prières obligatoires par jour en islam ?", answers: ["3", "5", "7"], correct: "5" },
+        { question: "Quel est le livre sacré de l’islam ?", answers: ["Bible", "Torah", "Coran"], correct: "Coran" },
+        { question: "Dans quelle ville est né le Prophète Mohammed ?", answers: ["Médine", "La Mecque", "Jérusalem"], correct: "La Mecque" },
+        { question: "Quel mois les musulmans jeûnent-ils ?", answers: ["Ramadan", "Chawwal", "Mouharram"], correct: "Ramadan" },
+        { question: "Combien de sourates dans le Coran ?", answers: ["114", "99", "120"], correct: "114" },
+        { question: "Quel est le premier pilier de l’islam ?", answers: ["La prière", "La profession de foi", "Le jeûne"], correct: "La profession de foi" },
+        { question: "Quel prophète a construit l’arche ?", answers: ["Moussa", "Nouh", "Ibrahim"], correct: "Nouh" },
+        { question: "Dans quelle ville se trouve la mosquée Al-Aqsa ?", answers: ["La Mecque", "Médine", "Jérusalem"], correct: "Jérusalem" },
+        { question: "Comment s’appelle le dernier prophète de l’islam ?", answers: ["Issa", "Moussa", "Mohammed"], correct: "Mohammed" },
+        { question: "Combien de fois par an a lieu le pèlerinage (Hajj) ?", answers: ["1", "2", "3"], correct: "1" },
+        // Questions plus difficiles :
+        { question: "Quel ange a transmis la révélation au Prophète Mohammed ?", answers: ["Mikaël", "Israfil", "Jibril"], correct: "Jibril" },
+        { question: "Quel calife a rassemblé le Coran sous forme de livre ?", answers: ["Abou Bakr", "Omar", "Othman"], correct: "Othman" },
+        { question: "Combien de versets (ayat) dans le Coran ?", answers: ["6236", "6666", "114"], correct: "6236" },
+        { question: "Quel est le nom de la grotte où le Prophète a reçu la première révélation ?", answers: ["Hira", "Thawr", "Safa"], correct: "Hira" },
+        { question: "Quel est le nom du père du Prophète Mohammed ?", answers: ["Abdallah", "Abou Talib", "Abdelmouttalib"], correct: "Abdallah" },
+        { question: "Quel est le nom de la mère du Prophète Mohammed ?", answers: ["Amina", "Khadija", "Fatima"], correct: "Amina" },
+        { question: "Quel est le deuxième calife de l'islam ?", answers: ["Omar", "Ali", "Othman"], correct: "Omar" },
+        { question: "Quelle sourate commence sans Bismillah ?", answers: ["At-Tawba", "Al-Fatiha", "Al-Baqara"], correct: "At-Tawba" },
+        { question: "Quel est le nom du puits célèbre à La Mecque ?", answers: ["Zamzam", "Bir Barhout", "Aïn Zarka"], correct: "Zamzam" },
+        { question: "Combien de jours dure le jeûne du Ramadan ?", answers: ["29 ou 30", "31", "28"], correct: "29 ou 30" }
+      ],
+      histoire: [
+        { question: "En quelle année a eu lieu la Révolution française ?", answers: ["1789", "1848", "1914"], correct: "1789" },
+        { question: "Qui était le premier président des États-Unis ?", answers: ["Lincoln", "Washington", "Jefferson"], correct: "Washington" },
+        { question: "Quel empire a construit le Colisée ?", answers: ["Grec", "Romain", "Égyptien"], correct: "Romain" },
+        { question: "Qui a découvert l’Amérique ?", answers: ["Christophe Colomb", "Vasco de Gama", "Magellan"], correct: "Christophe Colomb" },
+        { question: "Quel roi fut surnommé le Roi Soleil ?", answers: ["Louis XIV", "Louis XVI", "François Ier"], correct: "Louis XIV" },
+        { question: "En quelle année a commencé la Première Guerre mondiale ?", answers: ["1914", "1939", "1815"], correct: "1914" },
+        { question: "Qui a inventé l’imprimerie ?", answers: ["Gutenberg", "Edison", "Pasteur"], correct: "Gutenberg" },
+        { question: "Où se trouve la pyramide de Khéops ?", answers: ["Gizeh", "Louxor", "Saqqarah"], correct: "Gizeh" },
+        { question: "Quel pays a construit la Grande Muraille ?", answers: ["Chine", "Japon", "Inde"], correct: "Chine" },
+        { question: "Qui était Cléopâtre ?", answers: ["Reine d’Égypte", "Impératrice de Rome", "Reine de Perse"], correct: "Reine d’Égypte" },
+        { question: "Qui a été le premier homme à marcher sur la Lune ?", answers: ["Neil Armstrong", "Buzz Aldrin", "Youri Gagarine"], correct: "Neil Armstrong" },
+        { question: "Quel événement a marqué la fin de la Seconde Guerre mondiale ?", answers: ["Chute de Berlin", "Débarquement de Normandie", "Capitulation du Japon"], correct: "Capitulation du Japon" },
+        { question: "Qui était le chef des Gaulois lors de la guerre contre Jules César ?", answers: ["Vercingétorix", "Astérix", "Charlemagne"], correct: "Vercingétorix" },
+        { question: "En quelle année a eu lieu la chute du mur de Berlin ?", answers: ["1989", "1991", "1975"], correct: "1989" },
+        { question: "Quel pharaon a fait construire la grande pyramide ?", answers: ["Khéops", "Ramsès II", "Toutankhamon"], correct: "Khéops" },
+        { question: "Qui a écrit 'Le Prince' ?", answers: ["Machiavel", "Platon", "Aristote"], correct: "Machiavel" },
+        { question: "Quel pays a été dirigé par Nelson Mandela ?", answers: ["Afrique du Sud", "Kenya", "Nigéria"], correct: "Afrique du Sud" },
+        { question: "Qui a été le premier empereur de France ?", answers: ["Napoléon Bonaparte", "Louis XVI", "Charlemagne"], correct: "Napoléon Bonaparte" },
+        { question: "Quel traité a mis fin à la Première Guerre mondiale ?", answers: ["Versailles", "Tordesillas", "Vienne"], correct: "Versailles" },
+        { question: "Qui a découvert la pénicilline ?", answers: ["Alexander Fleming", "Louis Pasteur", "Marie Curie"], correct: "Alexander Fleming" }
+      ],
+      geo: [
+        { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
+        { question: "Combien de continents existe-t-il ?", answers: ["5", "6", "7"], correct: "7" },
+        { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Antarctique"], correct: "Antarctique" },
+        { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazon", "Yangtsé"], correct: "Amazon" },
+        { question: "Dans quel pays se trouve le Kilimandjaro ?", answers: ["Kenya", "Tanzanie", "Afrique du Sud"], correct: "Tanzanie" },
+        { question: "Quelle est la capitale du Brésil ?", answers: ["Rio", "Brasilia", "São Paulo"], correct: "Brasilia" },
+        { question: "Quel est le plus grand lac d’Afrique ?", answers: ["Victoria", "Tanganyika", "Malawi"], correct: "Victoria" },
+        { question: "Quel pays a la plus grande superficie ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
+        { question: "Quel est le plus haut sommet d’Europe ?", answers: ["Mont Blanc", "Elbrouz", "Matterhorn"], correct: "Elbrouz" },
+        { question: "Quel est le plus grand pays d’Amérique du Sud ?", answers: ["Argentine", "Brésil", "Colombie"], correct: "Brésil" }
+      ],
+      autres: [
+        { question: "Quel est l’élément chimique \"O\" ?", answers: ["Or", "Oxygène", "Osmium"], correct: "Oxygène" },
+        { question: "Quel est le plus grand mammifère marin ?", answers: ["Baleine bleue", "Orque", "Dauphin"], correct: "Baleine bleue" },
+        { question: "Quel est le plus grand oiseau ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
+        { question: "Combien de côtés a un hexagone ?", answers: ["5", "6", "8"], correct: "6" },
+        { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Antoine de Saint-Exupéry", "Jules Verne"], correct: "Antoine de Saint-Exupéry" },
+        { question: "Quel est le symbole chimique du fer ?", answers: ["Fe", "Ir", "Fr"], correct: "Fe" },
+        { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant" },
+        { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
+        { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
+        { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" }
+      ],
+    };
+  </script>
+  <script>
+    function getCategory() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('cat') || 'culture';
+    }
+  </script>
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
