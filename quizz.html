@@ -177,6 +177,7 @@
     <button class="menu-btn" onclick="startQuiz('histoire')">Histoire</button>
     <button class="menu-btn" onclick="startQuiz('geo')">Géographie</button>
     <button class="menu-btn" onclick="startQuiz('autres')">Autres</button>
+    <button class="menu-btn" onclick="startQuiz('sport')">Sport</button>
   </div>
 
   <script>
@@ -240,6 +241,18 @@ const questionsByCategory = {
     { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
     { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
     { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" }
+  ],
+  sport: [
+    { question: "Quel pays a remporté la Coupe du Monde de football 2018 ?", answers: ["Brésil", "France", "Allemagne"], correct: "France", difficulty: "facile" },
+    { question: "Combien de joueurs dans une équipe de football ?", answers: ["9", "10", "11"], correct: "11", difficulty: "facile" },
+    { question: "Quel est le sport de Michael Jordan ?", answers: ["Football", "Basketball", "Tennis"], correct: "Basketball", difficulty: "facile" },
+    { question: "Combien de points pour un essai au rugby ?", answers: ["3", "5", "7"], correct: "5", difficulty: "moyenne" },
+    { question: "Dans quel pays sont nés les Jeux Olympiques ?", answers: ["Italie", "Grèce", "France"], correct: "Grèce", difficulty: "facile" },
+    { question: "Quel est le surnom d’Usain Bolt ?", answers: ["La Fusée", "L’Éclair", "La Flèche"], correct: "L’Éclair", difficulty: "moyenne" },
+    { question: "Combien de sets pour gagner un match de tennis masculin en Grand Chelem ?", answers: ["2", "3", "5"], correct: "3", difficulty: "moyenne" },
+    { question: "Quel est le record du 100m (en secondes) ?", answers: ["9.58", "9.72", "9.63"], correct: "9.58", difficulty: "difficile" },
+    { question: "Combien de joueurs sur le terrain au basket (une équipe) ?", answers: ["5", "6", "7"], correct: "5", difficulty: "facile" },
+    { question: "Quel pays a gagné le plus de médailles olympiques ?", answers: ["Chine", "États-Unis", "Russie"], correct: "États-Unis", difficulty: "difficile" }
   ]
 };
 
@@ -271,7 +284,8 @@ const titles = {
   islam: "🕌 Quiz Culture Islamique",
   histoire: "📜 Quiz Histoire",
   geo: "🌍 Quiz Géographie",
-  autres: "⭐ Quiz Autres"
+  autres: "⭐ Quiz Autres",
+  sport: "🏆 Quiz Sport"
 };
 document.querySelector('h1').textContent = titles[cat] || titles['culture'];
 
