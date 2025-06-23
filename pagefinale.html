@@ -4,9 +4,18 @@
   <meta charset="UTF-8">
   <title>Résultat Quiz</title>
   <style>
+    :root {
+      --bg: #181c2f;
+      --card-bg: rgba(24,28,47,0.97);
+      --text: #fff;
+      --primary: #1de9b6;
+      --secondary: #7c4dff;
+      --accent: #ff4081;
+      --shadow: #7c4dff;
+    }
     body {
-      background: #181c2f;
-      color: #fff;
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Orbitron', Arial, sans-serif;
       display: flex;
       flex-direction: column;
@@ -15,27 +24,28 @@
       margin: 0;
       padding: 0;
       justify-content: center;
+      transition: background 0.3s, color 0.3s;
     }
     .card {
-      background: rgba(24,28,47,0.97);
+      background: var(--card-bg);
       border-radius: 18px;
-      box-shadow: 0 0 24px #7c4dff, 0 0 4px #fff3;
+      box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
       padding: 28px;
       margin: 18px;
       width: 340px;
-      border: 2px solid #1de9b6;
+      border: 2px solid var(--primary);
       text-align: center;
     }
     h1 {
-      color: #1de9b6;
-      text-shadow: 0 0 12px #1de9b6, 0 0 40px #7c4dff;
+      color: var(--primary);
+      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
       font-size: 2em;
       margin-bottom: 18px;
     }
     .score {
       font-size: 1.3em;
       margin-bottom: 18px;
-      color: #ff4081;
+      color: var(--accent);
     }
     ul {
       text-align: left;
@@ -64,9 +74,29 @@
       box-shadow: 0 0 32px #1de9b6, 0 0 16px #ff4081;
       transform: scale(1.05);
     }
+    #theme-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1000;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 600;
+      background: linear-gradient(90deg,#1de9b6 0%,#7c4dff 100%);
+      color: #fff;
+      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
+      transition: background 0.2s;
+    }
+    #theme-toggle:hover {
+      background: linear-gradient(90deg,#ff4081 0%,#1de9b6 100%);
+    }
   </style>
 </head>
 <body>
+  <button id="theme-toggle">Mode clair/sombre</button>
   <div class="card">
     <h1>Résultat du Quiz</h1>
     <div id="result"></div>
@@ -74,6 +104,44 @@
     <button class="btn" onclick="window.location.href='index.html'">Retour à l'accueil</button>
   </div>
   <script>
+    // Gestion du thème clair/sombre
+    const lightTheme = {
+      '--bg': '#f7f7fa',
+      '--card-bg': '#fff',
+      '--text': '#181c2f',
+      '--primary': '#1de9b6',
+      '--secondary': '#7c4dff',
+      '--accent': '#ff4081',
+      '--shadow': '#e0e0e0'
+    };
+    const darkTheme = {
+      '--bg': '#181c2f',
+      '--card-bg': 'rgba(24,28,47,0.97)',
+      '--text': '#fff',
+      '--primary': '#1de9b6',
+      '--secondary': '#7c4dff',
+      '--accent': '#ff4081',
+      '--shadow': '#7c4dff'
+    };
+    function applyTheme(theme) {
+      for (const key in theme) {
+        document.documentElement.style.setProperty(key, theme[key]);
+      }
+    }
+    function isDark() {
+      return (localStorage.getItem('theme') || 'dark') === 'dark';
+    }
+    function initTheme() {
+      if (isDark()) applyTheme(darkTheme);
+      else applyTheme(lightTheme);
+    }
+    document.getElementById('theme-toggle').onclick = function() {
+      const dark = isDark();
+      localStorage.setItem('theme', dark ? 'light' : 'dark');
+      initTheme();
+    };
+    initTheme();
+
     // Récupère les données du quiz depuis le localStorage
     const data = JSON.parse(localStorage.getItem('quizResult'));
     if (data) {
