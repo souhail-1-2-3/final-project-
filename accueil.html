@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Accueil Quiz</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    :root {
+      --bg: #181c2f;
+      --card-bg: rgba(24,28,47,0.97);
+      --text: #fff;
+      --primary: #1de9b6;
+      --secondary: #7c4dff;
+      --accent: #ff4081;
+      --shadow: #7c4dff;
+    }
+    body {
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      background: var(--bg) !important;
+      color: var(--text) !important;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 1px;
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .accueil-card {
+      background: var(--card-bg) !important;
+      color: var(--text) !important;
+      border-radius: 18px;
+      box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
+      padding: 48px 36px 36px 36px;
+      text-align: center;
+      max-width: 400px;
+      border: 2px solid var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+    .accueil-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(120deg, #1de9b6 0%, #ff4081 100%);
+      opacity: 0.10;
+      z-index: 0;
+      pointer-events: none;
+    }
+    h1 {
+      color: var(--primary) !important;
+      margin-bottom: 18px;
+      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
+      font-size: 2.2em;
+      letter-spacing: 2px;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+    .desc {
+      color: #fff;
+      margin-bottom: 32px;
+      font-size: 1.1em;
+      position: relative;
+      z-index: 1;
+    }
+    .accueil-btn {
+      display: block;
+      width: 100%;
+      margin: 14px 0;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #1de9b6 0%, #7c4dff 100%);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      outline: none;
+      position: relative;
+      z-index: 1;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .accueil-btn:hover {
+      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
+      transform: scale(1.04);
+      box-shadow: 0 0 20px #ff4081, 0 0 8px #1de9b6;
+    }
+    .scores {
+      margin-top: 30px;
+      color: #ff4081;
+      font-size: 1.1em;
+      font-weight: 600;
+      text-shadow: 0 0 10px #1de9b6, 0 0 20px #7c4dff;
+      border-top: 1px solid #1de9b6;
+      padding-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .scores ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+    }
+    .scores li {
+      margin: 6px 0;
+      color: #fff;
+      font-weight: 400;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle" style="position:fixed;top:18px;right:18px;z-index:1000;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:'Orbitron',Arial,sans-serif;font-weight:600;background:linear-gradient(90deg,#1de9b6 0%,#7c4dff 100%);color:#fff;box-shadow:0 0 10px #7c4dff,0 0 2px #ff4081;transition:background 0.2s;">
+    Mode clair/sombre
+  </button>
+  <div class="accueil-card">
+    <h1>Bienvenue sur le Quiz !</h1>
+    <div class="desc">
+      Testez vos connaissances sur différents thèmes.<br>
+      Choisissez un mode pour commencer :
+    </div>
+    <button class="accueil-btn" onclick="window.location.href='quizz.html'">Commencer</button>
+    <button class="accueil-btn" onclick="window.location.href='index.html'">Sélection de thème</button>
+    <button class="accueil-btn" onclick="afficherScores()">Scores</button>
+    <div class="scores" id="scores" style="display:none;">
+      <strong>Derniers scores :</strong>
+      <ul id="scores-list"></ul>
+    </div>
+  </div>
+  <script>
+    // Exemple de récupération de scores depuis le localStorage
+    function afficherScores() {
+      const scoresDiv = document.getElementById('scores');
+      const scoresList = document.getElementById('scores-list');
+      scoresDiv.style.display = scoresDiv.style.display === "none" ? "block" : "none";
+      scoresList.innerHTML = "";
+      let scores = [];
+      try {
+        scores = JSON.parse(localStorage.getItem('quizScores')) || [];
+      } catch(e) {}
+      if(scores.length === 0) {
+        scoresList.innerHTML = "<li>Aucun score enregistré.</li>";
+      } else {
+        scores.slice(-5).forEach((score) => {
+          // Affichage plus lisible
+          let txt = typeof score === "string" ? score : `${score.date} — ${score.theme} : ${score.score} (${score.percent}%)`;
+          const li = document.createElement('li');
+          li.textContent = txt;
+          scoresList.appendChild(li);
+        });
+      }
+    }
+
+    // Palette claire
+    const lightTheme = {
+      '--bg': '#f7f7fa',
+      '--card-bg': '#fff',
+      '--text': '#181c2f',
+      '--primary': '#1de9b6',
+      '--secondary': '#7c4dff',
+      '--accent': '#ff4081',
+      '--shadow': '#e0e0e0'
+    };
+    // Palette sombre (par défaut)
+    const darkTheme = {
+      '--bg': '#181c2f',
+      '--card-bg': 'rgba(24,28,47,0.97)',
+      '--text': '#fff',
+      '--primary': '#1de9b6',
+      '--secondary': '#7c4dff',
+      '--accent': '#ff4081',
+      '--shadow': '#7c4dff'
+    };
+    // Applique le thème
+    function applyTheme(theme) {
+      for (const key in theme) {
+        document.documentElement.style.setProperty(key, theme[key]);
+      }
+    }
+    // Détecte le thème actuel
+    function isDark() {
+      return (localStorage.getItem('theme') || 'dark') === 'dark';
+    }
+    // Initialise le thème au chargement
+    function initTheme() {
+      if (isDark()) applyTheme(darkTheme);
+      else applyTheme(lightTheme);
+    }
+    // Toggle
+    document.getElementById('theme-toggle').onclick = function() {
+      const dark = isDark();
+      localStorage.setItem('theme', dark ? 'light' : 'dark');
+      initTheme();
+    };
+    initTheme();
+  </script>
+</body>
+</html>

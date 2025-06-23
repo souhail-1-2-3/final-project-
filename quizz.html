@@ -4,9 +4,19 @@
   <meta charset="UTF-8">
   <title>Quiz Culture Générale</title>
   <style>
+    :root {
+      --bg: #181c2f;
+      --card-bg: rgba(24,28,47,0.97);
+      --text: #fff;
+      --primary: #1de9b6;
+      --secondary: #7c4dff;
+      --accent: #ff4081;
+      --shadow: #7c4dff;
+    }
     body {
       font-family: 'Orbitron', 'Arial', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #2c5364 80%);
+      background: var(--bg) !important;
+      color: var(--text) !important;
       margin: 0;
       padding: 30px;
       display: flex;
@@ -17,22 +27,23 @@
     }
 
     h1 {
-      color: #00ffe7;
+      color: var(--primary);
       margin-bottom: 20px;
-      text-shadow: 0 0 12px #00ffe7, 0 0 40px #0ff;
+      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
       font-size: 2.5em;
       font-family: 'Orbitron', 'Arial', sans-serif;
       letter-spacing: 2px;
     }
 
     .card {
-      background: rgba(20, 30, 60, 0.95);
+      background: var(--card-bg) !important;
+      color: var(--text) !important;
       border-radius: 18px;
-      box-shadow: 0 0 24px #00ffe7, 0 0 4px #fff3;
+      box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
       padding: 28px;
       margin: 18px;
       width: 340px;
-      border: 2px solid #00ffe7;
+      border: 2px solid var(--primary);
       transition: transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
@@ -43,15 +54,15 @@
       position: absolute;
       inset: 0;
       border-radius: 18px;
-      background: linear-gradient(120deg, #00ffe7 0%, #ff00cc 100%);
-      opacity: 0.08;
+      background: linear-gradient(120deg, #1de9b6 0%, #ff4081 100%);
+      opacity: 0.10;
       z-index: 0;
       pointer-events: none;
     }
 
     .card:hover {
       transform: scale(1.03) rotate(-1deg);
-      box-shadow: 0 0 40px #00ffe7, 0 0 8px #ff00cc;
+      box-shadow: 0 0 40px #1de9b6, 0 0 8px #ff4081;
     }
 
     .question {
@@ -59,7 +70,7 @@
       margin-bottom: 18px;
       color: #fff;
       font-size: 1.15em;
-      text-shadow: 0 0 6px #00ffe7;
+      text-shadow: 0 0 6px #1de9b6;
       position: relative;
       z-index: 1;
     }
@@ -71,12 +82,12 @@
       padding: 12px;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
+      background: linear-gradient(90deg, #1de9b6 0%, #ff4081 100%);
       color: #fff;
       font-weight: bold;
       font-size: 1em;
       cursor: pointer;
-      box-shadow: 0 0 10px #00ffe7, 0 0 2px #ff00cc;
+      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
       transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       outline: none;
       position: relative;
@@ -84,9 +95,9 @@
     }
 
     .answers button:hover:not(:disabled) {
-      background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
       transform: scale(1.04);
-      box-shadow: 0 0 20px #ff00cc, 0 0 8px #00ffe7;
+      box-shadow: 0 0 20px #ff4081, 0 0 8px #1de9b6;
     }
 
     .answers button:disabled {
@@ -99,7 +110,7 @@
       margin-top: 12px;
       font-weight: bold;
       font-size: 1.1em;
-      text-shadow: 0 0 8px #fff, 0 0 16px #00ffe7;
+      text-shadow: 0 0 8px #fff, 0 0 16px #1de9b6;
       min-height: 1.5em;
       position: relative;
       z-index: 1;
@@ -108,15 +119,15 @@
     #scoreboard {
       margin: 22px 0;
       font-size: 1.3em;
-      color: #00ffe7;
-      text-shadow: 0 0 10px #00ffe7, 0 0 20px #ff00cc;
+      color: #ff4081;
+      text-shadow: 0 0 10px #1de9b6, 0 0 20px #7c4dff;
       font-family: 'Orbitron', 'Arial', sans-serif;
       letter-spacing: 2px;
     }
 
     #restart {
       padding: 12px 28px;
-      background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
       color: #fff;
       border: none;
       border-radius: 10px;
@@ -125,13 +136,13 @@
       font-size: 1.1em;
       font-family: 'Orbitron', 'Arial', sans-serif;
       font-weight: bold;
-      box-shadow: 0 0 16px #ff00cc, 0 0 8px #00ffe7;
+      box-shadow: 0 0 16px #ff4081, 0 0 8px #7c4dff;
       transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
     }
 
     #restart:hover {
-      background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
-      box-shadow: 0 0 32px #00ffe7, 0 0 16px #ff00cc;
+      background: linear-gradient(90deg, #1de9b6 0%, #ff4081 100%);
+      box-shadow: 0 0 32px #1de9b6, 0 0 16px #ff4081;
       transform: scale(1.05);
     }
 
@@ -143,25 +154,111 @@
       margin: 10px 0;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
+      background: linear-gradient(90deg, #1de9b6 0%, #7c4dff 100%);
       color: #fff;
       font-weight: bold;
       font-size: 1em;
       cursor: pointer;
-      box-shadow: 0 0 10px #00ffe7, 0 0 2px #ff00cc;
+      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
       transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       outline: none;
       display: inline-block;
     }
 
     .menu-btn:hover {
-      background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
       transform: scale(1.04);
-      box-shadow: 0 0 20px #ff00cc, 0 0 8px #00ffe7;
+      box-shadow: 0 0 20px #ff4081, 0 0 8px #1de9b6;
     }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 8px;
+      }
+      .card, #timer-bar {
+        width: 98vw !important;
+        min-width: unset;
+        max-width: 100vw;
+        box-sizing: border-box;
+        padding: 12px !important;
+        margin: 8px 0 !important;
+      }
+      h1 {
+        font-size: 1.3em !important;
+        margin-bottom: 10px !important;
+        text-align: center;
+        word-break: break-word;
+      }
+      #scoreboard {
+        font-size: 1em !important;
+        margin: 12px 0 !important;
+      }
+      .answers button, .menu-btn, #restart, #back {
+        font-size: 1em !important;
+        padding: 10px 0 !important;
+        margin: 7px 0 !important;
+        min-width: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .menu-btn {
+        padding: 10px 0 !important;
+        font-size: 1em !important;
+      }
+      .result, .explication {
+        font-size: 1em !important;
+      }
+    }
+
+    // Palette claire
+const lightTheme = {
+  '--bg': '#f7f7fa',
+  '--card-bg': '#fff',
+  '--text': '#181c2f',
+  '--primary': '#1de9b6',
+  '--secondary': '#7c4dff',
+  '--accent': '#ff4081',
+  '--shadow': '#e0e0e0'
+};
+// Palette sombre (par défaut)
+const darkTheme = {
+  '--bg': '#181c2f',
+  '--card-bg': 'rgba(24,28,47,0.97)',
+  '--text': '#fff',
+  '--primary': '#1de9b6',
+  '--secondary': '#7c4dff',
+  '--accent': '#ff4081',
+  '--shadow': '#7c4dff'
+};
+// Applique le thème
+function applyTheme(theme) {
+  for (const key in theme) {
+    document.documentElement.style.setProperty(key, theme[key]);
+  }
+}
+// Détecte le thème actuel
+function isDark() {
+  return (localStorage.getItem('theme') || 'dark') === 'dark';
+}
+// Initialise le thème au chargement
+function initTheme() {
+  if (isDark()) applyTheme(darkTheme);
+  else applyTheme(lightTheme);
+}
+// Toggle
+document.getElementById('theme-toggle').onclick = function() {
+  const dark = isDark();
+  localStorage.setItem('theme', dark ? 'light' : 'dark');
+  initTheme();
+};
+initTheme();
   </style>
 </head>
 <body>
+
+  <button id="theme-toggle" style="position:fixed;top:18px;right:18px;z-index:1000;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:'Orbitron',Arial,sans-serif;font-weight:600;background:linear-gradient(90deg,#1de9b6 0%,#7c4dff 100%);color:#fff;box-shadow:0 0 10px #7c4dff,0 0 2px #ff4081;transition:background 0.2s;">
+    Mode clair/sombre
+  </button>
 
   <h1>🧠 Quiz Culture Générale</h1>
   <div id="scoreboard">Score : 0 / 3</div>
@@ -178,6 +275,15 @@
     <button class="menu-btn" onclick="startQuiz('geo')">Géographie</button>
     <button class="menu-btn" onclick="startQuiz('autres')">Autres</button>
     <button class="menu-btn" onclick="startQuiz('sport')">Sport</button>
+    <div style="margin-top:20px;">
+      <label style="color:#fff;font-size:1em;">
+        <input type="checkbox" id="no-timer" style="transform:scale(1.3);margin-right:8px;">
+        Mode sans timer (relax)
+      </label>
+    </div>
+  </div>
+  <div id="timer-bar" style="width:340px;height:10px;background:#222;border-radius:6px;overflow:hidden;margin:18px auto 0 auto;display:none;">
+    <div id="timer-progress" style="height:100%;background:linear-gradient(90deg,#ff4081,#1de9b6);width:100%;transition:width 0.2s;"></div>
   </div>
 
   <script>
@@ -289,10 +395,38 @@ const titles = {
 };
 document.querySelector('h1').textContent = titles[cat] || titles['culture'];
 
+let timerEnabled = true;
+let timerDuration = 15; // secondes par question
+let timerInterval;
+const timerBar = document.getElementById('timer-bar');
+const timerProgress = document.getElementById('timer-progress');
+
+// Ajoute la gestion du mode sans timer
+function startQuiz(cat) {
+  timerEnabled = !document.getElementById('no-timer').checked;
+  window.location.href = `quizz.html?cat=${cat}&timer=${timerEnabled ? 1 : 0}`;
+}
+
+// Récupère le paramètre timer dans l'URL
+function getTimerMode() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('timer') !== "0";
+}
+timerEnabled = getTimerMode();
+
+// Pour stocker les réponses de l'utilisateur
+let userAnswers = [];
+
+// Ajoute une propriété "explication" à chaque question si tu veux (exemple) :
+/*
+{ question: "...", answers: [...], correct: "...", explication: "Petite anecdote ou explication." }
+*/
+
 function showQuestion() {
+  clearInterval(timerInterval);
+  timerBar.style.display = timerEnabled ? "block" : "none";
   if (current >= questions.length) {
-    quizDiv.innerHTML = `<div class="result">Quiz terminé !<br>Votre score : ${score} / ${questions.length}</div>`;
-    document.getElementById('restart').style.display = "inline-block";
+    showFinalScore();
     return;
   }
   const q = questions[current];
@@ -303,25 +437,46 @@ function showQuestion() {
         ${q.answers.map(ans => `<button>${ans}</button>`).join('')}
       </div>
       <div class="result"></div>
+      <div class="explication" style="margin-top:8px;color:#1de9b6;font-size:0.98em;"></div>
     </div>
   `;
+  if (timerEnabled) {
+    let timeLeft = timerDuration;
+    timerProgress.style.width = "100%";
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerProgress.style.width = (timeLeft / timerDuration * 100) + "%";
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        const resultDiv = quizDiv.querySelector('.result');
+        resultDiv.textContent = "⏰ Temps écoulé !";
+        resultDiv.style.color = "#ff4081";
+        quizDiv.querySelector('.explication').innerHTML = `Bonne réponse : <b>${q.correct}</b>${q.explication ? "<br>" + q.explication : ""}`;
+        document.querySelectorAll('.answers button').forEach(b => b.disabled = true);
+        userAnswers.push({question: q.question, user: null, correct: q.correct});
+        setTimeout(() => { current++; showQuestion(); }, 2000);
+      }
+    }, 1000);
+  }
   document.querySelectorAll('.answers button').forEach(btn => {
     btn.addEventListener('click', () => {
+      clearInterval(timerInterval);
       const result = quizDiv.querySelector('.result');
-      if (btn.textContent === q.correct) {
+      const explication = quizDiv.querySelector('.explication');
+      let isCorrect = btn.textContent === q.correct;
+      if (isCorrect) {
         result.textContent = "✅ Bonne réponse !";
         result.style.color = "green";
         score++;
       } else {
         result.textContent = "❌ Mauvaise réponse.";
         result.style.color = "red";
+        explication.innerHTML = `Bonne réponse : <b>${q.correct}</b>${q.explication ? "<br>" + q.explication : ""}`;
       }
+      userAnswers.push({question: q.question, user: btn.textContent, correct: q.correct});
       scoreboard.textContent = `Score : ${score} / ${questions.length}`;
       document.querySelectorAll('.answers button').forEach(b => b.disabled = true);
-      setTimeout(() => {
-        current++;
-        showQuestion();
-      }, 1000);
+      setTimeout(() => { current++; showQuestion(); }, 2000);
     });
   });
 }
@@ -334,8 +489,71 @@ function goBack() {
   window.location.href = "index.html";
 }
 
-function startQuiz(cat) {
-  window.location.href = `quizz.html?cat=${cat}`;
+function showFinalScore() {
+  let message = "";
+  const ratio = score / questions.length;
+  const percent = Math.round(ratio * 100);
+  if (ratio === 1) message = "🎉 Parfait ! Tu es incollable !";
+  else if (ratio >= 0.8) message = "👏 Très bien !";
+  else if (ratio >= 0.5) message = "👍 Pas mal, continue à t'entraîner !";
+  else message = "💡 Tu peux progresser, réessaie !";
+
+  // Sauvegarde du score dans le localStorage
+  const scoresKey = 'quizScores';
+  let scores = [];
+  try {
+    scores = JSON.parse(localStorage.getItem(scoresKey)) || [];
+  } catch(e) {}
+  const now = new Date();
+  const dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString().slice(0,5);
+  scores.push({
+    date: dateStr,
+    theme: titles[cat] || cat,
+    score: `${score}/${questions.length}`,
+    percent: percent
+  });
+  // On garde les 10 meilleurs scores (par pourcentage décroissant)
+  scores = scores.sort((a, b) => b.percent - a.percent).slice(0, 10);
+  localStorage.setItem(scoresKey, JSON.stringify(scores));
+
+  // Affichage du score final
+  let reviewHtml = userAnswers.map((a, i) =>
+    `<li style="margin-bottom:8px;">
+      <b>Q${i+1}.</b> ${a.question}<br>
+      <span style="color:${a.user === a.correct ? 'green':'#ff4081'}">
+        Ta réponse : ${a.user ? a.user : "<i>aucune</i>"}
+      </span>
+      <br>
+      <span style="color:#1de9b6">Bonne réponse : ${a.correct}</span>
+    </li>`
+  ).join('');
+
+  // Affichage des meilleurs scores
+  let bestScoresHtml = scores.map(s =>
+    `<li>${s.date} — <b>${s.theme}</b> : <span style="color:#1de9b6">${s.score} (${s.percent}%)</span></li>`
+  ).join('');
+
+  quizDiv.innerHTML = `
+    <div class="card">
+      <div class="result" style="font-size:1.3em;">
+        Quiz terminé !<br>
+        Score : <b>${score} / ${questions.length}</b> (${percent}%)
+      </div>
+      <div style="margin:16px 0 8px 0;font-size:1.1em;">${message}</div>
+      <button class="menu-btn" onclick="showReview()" style="margin-bottom:12px;">Revoir mes réponses</button>
+      <button class="menu-btn" onclick="restartQuiz()">Recommencer</button>
+      <button class="menu-btn" onclick="goBack()">Retour au menu</button>
+      <div style="margin-top:24px;">
+        <strong style="color:#ff4081;">🏆 Meilleurs scores</strong>
+        <ul style="margin:10px 0 0 0; padding:0; list-style:none; text-align:left;">${bestScoresHtml}</ul>
+      </div>
+      <ul id="review-list" style="display:none;text-align:left;margin-top:18px;">${reviewHtml}</ul>
+    </div>
+  `;
+}
+
+function showReview() {
+  document.getElementById('review-list').style.display = "block";
 }
 
 // Met à jour le score initial
