@@ -209,49 +209,6 @@
         font-size: 1em !important;
       }
     }
-
-    // Palette claire
-const lightTheme = {
-  '--bg': '#f7f7fa',
-  '--card-bg': '#fff',
-  '--text': '#181c2f',
-  '--primary': '#1de9b6',
-  '--secondary': '#7c4dff',
-  '--accent': '#ff4081',
-  '--shadow': '#e0e0e0'
-};
-// Palette sombre (par défaut)
-const darkTheme = {
-  '--bg': '#181c2f',
-  '--card-bg': 'rgba(24,28,47,0.97)',
-  '--text': '#fff',
-  '--primary': '#1de9b6',
-  '--secondary': '#7c4dff',
-  '--accent': '#ff4081',
-  '--shadow': '#7c4dff'
-};
-// Applique le thème
-function applyTheme(theme) {
-  for (const key in theme) {
-    document.documentElement.style.setProperty(key, theme[key]);
-  }
-}
-// Détecte le thème actuel
-function isDark() {
-  return (localStorage.getItem('theme') || 'dark') === 'dark';
-}
-// Initialise le thème au chargement
-function initTheme() {
-  if (isDark()) applyTheme(darkTheme);
-  else applyTheme(lightTheme);
-}
-// Toggle
-document.getElementById('theme-toggle').onclick = function() {
-  const dark = isDark();
-  localStorage.setItem('theme', dark ? 'light' : 'dark');
-  initTheme();
-};
-initTheme();
   </style>
 </head>
 <body>
@@ -285,6 +242,51 @@ initTheme();
   <div id="timer-bar" style="width:340px;height:10px;background:#222;border-radius:6px;overflow:hidden;margin:18px auto 0 auto;display:none;">
     <div id="timer-progress" style="height:100%;background:linear-gradient(90deg,#ff4081,#1de9b6);width:100%;transition:width 0.2s;"></div>
   </div>
+
+  <script>
+    // Palette claire
+    const lightTheme = {
+      '--bg': '#f7f7fa',
+      '--card-bg': '#fff',
+      '--text': '#181c2f',
+      '--primary': '#1de9b6',
+      '--secondary': '#7c4dff',
+      '--accent': '#ff4081',
+      '--shadow': '#e0e0e0'
+    };
+    // Palette sombre (par défaut)
+    const darkTheme = {
+      '--bg': '#181c2f',
+      '--card-bg': 'rgba(24,28,47,0.97)',
+      '--text': '#fff',
+      '--primary': '#1de9b6',
+      '--secondary': '#7c4dff',
+      '--accent': '#ff4081',
+      '--shadow': '#7c4dff'
+    };
+    // Applique le thème
+    function applyTheme(theme) {
+      for (const key in theme) {
+        document.documentElement.style.setProperty(key, theme[key]);
+      }
+    }
+    // Détecte le thème actuel
+    function isDark() {
+      return (localStorage.getItem('theme') || 'dark') === 'dark';
+    }
+    // Initialise le thème au chargement
+    function initTheme() {
+      if (isDark()) applyTheme(darkTheme);
+      else applyTheme(lightTheme);
+    }
+    // Toggle
+    document.getElementById('theme-toggle').onclick = function() {
+      const dark = isDark();
+      localStorage.setItem('theme', dark ? 'light' : 'dark');
+      initTheme();
+    };
+    initTheme();
+  </script>
 
   <script>
 const questionsByCategory = {

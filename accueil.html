@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Accueil Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
     :root {
@@ -40,6 +41,8 @@
       border: 2px solid var(--primary);
       position: relative;
       overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
     .accueil-card::before {
       content: "";
@@ -62,6 +65,7 @@
       line-height: 1.2;
       position: relative;
       z-index: 1;
+      word-break: break-word;
     }
     .desc {
       color: #fff;
@@ -117,6 +121,46 @@
       color: #fff;
       font-weight: 400;
       font-size: 1em;
+    }
+
+    /* ----------- MOBILE OPTIMISATION ----------- */
+    @media (max-width: 600px) {
+      html, body {
+        font-size: 16px !important;
+        padding: 0 !important;
+      }
+      .accueil-card {
+        max-width: 98vw;
+        padding: 18px 4vw 18px 4vw;
+        margin: 0;
+        border-radius: 10px;
+      }
+      h1 {
+        font-size: 1.3em !important;
+        margin-bottom: 10px !important;
+        text-align: center;
+      }
+      .desc {
+        font-size: 1em !important;
+        margin-bottom: 18px !important;
+      }
+      .accueil-btn {
+        font-size: 1em !important;
+        padding: 12px 0 !important;
+        margin: 8px 0 !important;
+        border-radius: 8px;
+      }
+      .scores {
+        font-size: 1em !important;
+        padding-top: 10px !important;
+      }
+      #theme-toggle {
+        padding: 8px 12px !important;
+        font-size: 1em !important;
+        top: 8px !important;
+        right: 8px !important;
+        border-radius: 6px !important;
+      }
     }
   </style>
 </head>
