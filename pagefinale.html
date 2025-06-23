@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résultat Quiz</title>
+  <style>
+    body {
+      background: #181c2f;
+      color: #fff;
+      font-family: 'Orbitron', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+    }
+    .card {
+      background: rgba(24,28,47,0.97);
+      border-radius: 18px;
+      box-shadow: 0 0 24px #7c4dff, 0 0 4px #fff3;
+      padding: 28px;
+      margin: 18px;
+      width: 340px;
+      border: 2px solid #1de9b6;
+      text-align: center;
+    }
+    h1 {
+      color: #1de9b6;
+      text-shadow: 0 0 12px #1de9b6, 0 0 40px #7c4dff;
+      font-size: 2em;
+      margin-bottom: 18px;
+    }
+    .score {
+      font-size: 1.3em;
+      margin-bottom: 18px;
+      color: #ff4081;
+    }
+    ul {
+      text-align: left;
+      margin: 0 0 18px 0;
+      padding: 0 0 0 18px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .btn {
+      padding: 12px 28px;
+      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.1em;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: bold;
+      box-shadow: 0 0 16px #ff4081, 0 0 8px #7c4dff;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+      margin-top: 18px;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #1de9b6 0%, #ff4081 100%);
+      box-shadow: 0 0 32px #1de9b6, 0 0 16px #ff4081;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Résultat du Quiz</h1>
+    <div id="result"></div>
+    <div id="erreurs"></div>
+    <button class="btn" onclick="window.location.href='index.html'">Retour à l'accueil</button>
+  </div>
+  <script>
+    // Récupère les données du quiz depuis le localStorage
+    const data = JSON.parse(localStorage.getItem('quizResult'));
+    if (data) {
+      document.getElementById('result').innerHTML = `<div class="score">Score : <b>${data.score} / ${data.total}</b> (${data.percent}%)</div>`;
+      if (data.erreurs && data.erreurs.length) {
+        document.getElementById('erreurs').innerHTML = "<h2>Erreurs :</h2><ul>" +
+          data.erreurs.map(e => `<li><b>${e.question}</b><br>Ta réponse : <span style="color:#ff4081">${e.user || "aucune"}</span><br>Bonne réponse : <span style="color:#1de9b6">${e.correct}</span></li>`).join('') +
+          "</ul>";
+      } else {
+        document.getElementById('erreurs').innerHTML = "<h2>Aucune erreur !</h2>";
+      }
+    } else {
+      document.getElementById('result').innerHTML = "Aucun résultat à afficher.";
+    }
+  </script>
+</body>
+</html>

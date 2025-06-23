@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Accueil Quiz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
     :root {
@@ -15,164 +15,147 @@
       --accent: #ff4081;
       --shadow: #7c4dff;
     }
-    body {
-      font-family: 'Orbitron', 'Arial', sans-serif;
-      background: var(--bg) !important;
-      color: var(--text) !important;
+    html, body {
       margin: 0;
+      padding: 0;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      letter-spacing: 1px;
-      font-size: 18px;
-      line-height: 1.6;
-      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: .5px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
-    .accueil-card {
-      background: var(--card-bg) !important;
-      color: var(--text) !important;
-      border-radius: 18px;
-      box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
-      padding: 48px 36px 36px 36px;
-      text-align: center;
-      max-width: 400px;
+    .card, .accueil-card, .menu-card {
+      background: var(--card-bg);
+      color: var(--text);
+      border-radius: 12px;
+      box-shadow: 0 2px 16px var(--shadow);
+      padding: 18px 4vw;
+      max-width: 420px;
+      width: 98vw;
+      margin: 18px auto 0 auto;
       border: 2px solid var(--primary);
+      box-sizing: border-box;
       position: relative;
       overflow: hidden;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .accueil-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      background: linear-gradient(120deg, #1de9b6 0%, #ff4081 100%);
-      opacity: 0.10;
-      z-index: 0;
-      pointer-events: none;
     }
     h1 {
-      color: var(--primary) !important;
-      margin-bottom: 18px;
-      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
-      font-size: 2.2em;
-      letter-spacing: 2px;
-      font-family: 'Orbitron', 'Arial', sans-serif;
-      font-weight: 700;
-      line-height: 1.2;
-      position: relative;
-      z-index: 1;
+      font-size: 1.4em;
+      margin: 0 0 14px 0;
+      color: var(--primary);
+      text-align: center;
+      text-shadow: 0 0 8px var(--primary), 0 0 20px var(--secondary);
       word-break: break-word;
     }
-    .desc {
+    .desc, .scores, .explication {
+      font-size: 1em;
+      margin-bottom: 18px;
       color: #fff;
-      margin-bottom: 32px;
-      font-size: 1.1em;
-      position: relative;
-      z-index: 1;
-    }
-    .accueil-btn {
-      display: block;
-      width: 100%;
-      margin: 14px 0;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #1de9b6 0%, #7c4dff 100%);
-      color: #fff;
-      font-weight: 600;
-      font-size: 1.1em;
-      cursor: pointer;
-      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      font-family: 'Orbitron', 'Arial', sans-serif;
-      outline: none;
-      position: relative;
-      z-index: 1;
-      line-height: 1.4;
       text-align: center;
     }
-    .accueil-btn:hover {
-      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
-      transform: scale(1.04);
-      box-shadow: 0 0 20px #ff4081, 0 0 8px #1de9b6;
-    }
-    .scores {
-      margin-top: 30px;
-      color: #ff4081;
-      font-size: 1.1em;
+    .scores, .scores li { color: #ff4081; }
+    .scores ul { list-style: none; padding: 0; margin: 8px 0 0 0; }
+    .scores li { color: #fff; font-size: .98em; }
+    .menu-btn, .accueil-btn, #restart, #back, #theme-toggle {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 14px 0;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--text);
+      font-size: 1.08em;
       font-weight: 600;
-      text-shadow: 0 0 10px #1de9b6, 0 0 20px #7c4dff;
-      border-top: 1px solid #1de9b6;
-      padding-top: 18px;
-      position: relative;
-      z-index: 1;
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--secondary), 0 0 2px var(--accent);
+      transition: background .18s, box-shadow .18s, transform .18s;
+      font-family: 'Orbitron', Arial, sans-serif;
+      outline: none;
+      text-align: center;
+      user-select: none;
     }
-    .scores ul {
-      list-style: none;
-      padding: 0;
-      margin: 10px 0 0 0;
+    .menu-btn:active, .accueil-btn:active, #restart:active, #back:active, #theme-toggle:active {
+      transform: scale(.97);
+      background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
     }
-    .scores li {
-      margin: 6px 0;
-      color: #fff;
-      font-weight: 400;
-      font-size: 1em;
+    #theme-toggle {
+      position:fixed;
+      top:10px;right:10px;
+      z-index:1000;
+      width:auto;
+      min-width:120px;
+      padding:10px 14px;
+      font-size:1em;
+      border-radius:6px;
+      box-shadow:0 0 8px var(--secondary),0 0 2px var(--accent);
     }
-
-    /* ----------- MOBILE OPTIMISATION ----------- */
-    @media (max-width: 600px) {
-      html, body {
-        font-size: 16px !important;
-        padding: 0 !important;
-      }
-      .accueil-card {
-        max-width: 98vw;
-        padding: 18px 4vw 18px 4vw;
-        margin: 0;
-        border-radius: 10px;
-      }
-      h1 {
-        font-size: 1.3em !important;
-        margin-bottom: 10px !important;
-        text-align: center;
-      }
-      .desc {
-        font-size: 1em !important;
-        margin-bottom: 18px !important;
-      }
-      .accueil-btn {
-        font-size: 1em !important;
-        padding: 12px 0 !important;
-        margin: 8px 0 !important;
-        border-radius: 8px;
-      }
-      .scores {
-        font-size: 1em !important;
-        padding-top: 10px !important;
-      }
-      #theme-toggle {
-        padding: 8px 12px !important;
-        font-size: 1em !important;
-        top: 8px !important;
-        right: 8px !important;
-        border-radius: 6px !important;
-      }
+    .categories-grid {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .categories-grid > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 150px;
+    }
+    .categories-grid .menu-btn { width: 100%; min-width: 0; }
+    .accueil-unique-btn {
+      margin-top: 18px !important;
+      background: linear-gradient(90deg, #ff4081 0%, #ffe082 100%) !important;
+      color: #181c2f !important;
+      font-weight: bold !important;
+      border: 2px solid #ff4081 !important;
+      box-shadow: 0 0 12px #ff4081, 0 0 2px #ffe082 !important;
+      letter-spacing: 1.2px;
+      font-size: 1.08em !important;
+    }
+    .accueil-unique-btn:active {
+      background: linear-gradient(90deg, #ffe082 0%, #ff4081 100%) !important;
+      color: #ff4081 !important;
+    }
+    /* Mode clair */
+    :root[data-theme='light'] {
+      --bg: #f7f7fa;
+      --card-bg: #fff;
+      --text: #181c2f;
+      --primary: #1de9b6;
+      --secondary: #7c4dff;
+      --accent: #ff4081;
+      --shadow: #e0e0e0;
+    }
+    :root[data-theme='light'] .desc,
+    :root[data-theme='light'] .scores,
+    :root[data-theme='light'] .scores li { color: #181c2f !important; }
+    :root[data-theme='light'] .desc b { color: #1de9b6 !important; }
+    /* Responsive */
+    @media (max-width:600px) {
+      html, body { font-size: 15px !important; }
+      .card, .accueil-card, .menu-card { max-width: 99vw; padding: 10vw 2vw; border-radius: 8px; }
+      h1 { font-size: 1.1em !important; margin-bottom: 8px !important; }
+      .desc, .scores { font-size: .98em !important; margin-bottom: 12px !important; }
+      .menu-btn, .accueil-btn, #restart, #back, #theme-toggle { font-size: 1em !important; padding: 12px 0 !important; border-radius: 6px !important; }
+      .categories-grid { flex-direction: column; gap: 0; }
+      .categories-grid > div { width: 100%; gap: 0; }
     }
   </style>
 </head>
 <body>
-  <button id="theme-toggle" style="position:fixed;top:18px;right:18px;z-index:1000;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:'Orbitron',Arial,sans-serif;font-weight:600;background:linear-gradient(90deg,#1de9b6 0%,#7c4dff 100%);color:#fff;box-shadow:0 0 10px #7c4dff,0 0 2px #ff4081;transition:background 0.2s;">
-    Mode clair/sombre
-  </button>
+  <button id="theme-toggle">Clair / Sombre</button>
+  <!-- Place ici ton contenu principal, exemple accueil : -->
   <div class="accueil-card">
     <h1>Bienvenue sur le Quiz !</h1>
     <div class="desc">
       Testez vos connaissances sur différents thèmes.<br>
-      Choisissez un mode pour commencer :
+      <b>But du site :</b><br>
+      S’amuser tout en apprenant, seul ou à plusieurs.<br>
+      Sélectionnez un mode pour commencer !
     </div>
     <button class="accueil-btn" onclick="window.location.href='quizz.html'">Commencer</button>
     <button class="accueil-btn" onclick="window.location.href='index.html'">Sélection de thème</button>
@@ -183,21 +166,18 @@
     </div>
   </div>
   <script>
-    // Exemple de récupération de scores depuis le localStorage
+    // Scores (exemple)
     function afficherScores() {
       const scoresDiv = document.getElementById('scores');
       const scoresList = document.getElementById('scores-list');
       scoresDiv.style.display = scoresDiv.style.display === "none" ? "block" : "none";
       scoresList.innerHTML = "";
       let scores = [];
-      try {
-        scores = JSON.parse(localStorage.getItem('quizScores')) || [];
-      } catch(e) {}
+      try { scores = JSON.parse(localStorage.getItem('quizScores')) || []; } catch(e) {}
       if(scores.length === 0) {
         scoresList.innerHTML = "<li>Aucun score enregistré.</li>";
       } else {
         scores.slice(-5).forEach((score) => {
-          // Affichage plus lisible
           let txt = typeof score === "string" ? score : `${score.date} — ${score.theme} : ${score.score} (${score.percent}%)`;
           const li = document.createElement('li');
           li.textContent = txt;
@@ -205,43 +185,18 @@
         });
       }
     }
-
-    // Palette claire
+    // Thème clair/sombre ultra-rapide
     const lightTheme = {
-      '--bg': '#f7f7fa',
-      '--card-bg': '#fff',
-      '--text': '#181c2f',
-      '--primary': '#1de9b6',
-      '--secondary': '#7c4dff',
-      '--accent': '#ff4081',
-      '--shadow': '#e0e0e0'
+      '--bg': '#f7f7fa','--card-bg': '#fff','--text': '#181c2f','--primary': '#1de9b6','--secondary': '#7c4dff','--accent': '#ff4081','--shadow': '#e0e0e0'
+    }, darkTheme = {
+      '--bg': '#181c2f','--card-bg': 'rgba(24,28,47,0.97)','--text': '#fff','--primary': '#1de9b6','--secondary': '#7c4dff','--accent': '#ff4081','--shadow': '#7c4dff'
     };
-    // Palette sombre (par défaut)
-    const darkTheme = {
-      '--bg': '#181c2f',
-      '--card-bg': 'rgba(24,28,47,0.97)',
-      '--text': '#fff',
-      '--primary': '#1de9b6',
-      '--secondary': '#7c4dff',
-      '--accent': '#ff4081',
-      '--shadow': '#7c4dff'
-    };
-    // Applique le thème
-    function applyTheme(theme) {
-      for (const key in theme) {
-        document.documentElement.style.setProperty(key, theme[key]);
-      }
+    function applyTheme(theme, mode) {
+      for (const key in theme) document.documentElement.style.setProperty(key, theme[key]);
+      document.documentElement.setAttribute('data-theme', mode);
     }
-    // Détecte le thème actuel
-    function isDark() {
-      return (localStorage.getItem('theme') || 'dark') === 'dark';
-    }
-    // Initialise le thème au chargement
-    function initTheme() {
-      if (isDark()) applyTheme(darkTheme);
-      else applyTheme(lightTheme);
-    }
-    // Toggle
+    function isDark() { return (localStorage.getItem('theme') || 'dark') === 'dark'; }
+    function initTheme() { isDark() ? applyTheme(darkTheme, 'dark') : applyTheme(lightTheme, 'light'); }
     document.getElementById('theme-toggle').onclick = function() {
       const dark = isDark();
       localStorage.setItem('theme', dark ? 'light' : 'dark');

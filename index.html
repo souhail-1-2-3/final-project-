@@ -2,8 +2,10 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Menu Quiz</title>
+  <title>Quiz</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
     :root {
       --bg: #181c2f;
       --card-bg: rgba(24,28,47,0.97);
@@ -13,308 +15,179 @@
       --accent: #ff4081;
       --shadow: #7c4dff;
     }
-    body {
-      font-family: 'Orbitron', 'Arial', sans-serif;
-      background: linear-gradient(135deg, #181c2f 0%, #7c4dff 100%);
+    html, body {
       margin: 0;
+      padding: 0;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      letter-spacing: 1px;
-      font-size: 18px;              /* Standardise la taille de base */
-      line-height: 1.6;             /* Améliore l'interligne */
-      font-weight: 400;             /* Poids régulier par défaut */
-      background: var(--bg) !important;
-      color: var(--text) !important;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: .5px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
-    .menu-card {
-      background: rgba(24, 28, 47, 0.97);
-      border-radius: 18px;
-      box-shadow: 0 0 24px #7c4dff, 0 0 4px #fff3;
-      padding: 40px 30px;
-      text-align: center;
-      max-width: 350px;
-      border: 2px solid #1de9b6;
+    .card, .accueil-card, .menu-card {
+      background: var(--card-bg);
+      color: var(--text);
+      border-radius: 12px;
+      box-shadow: 0 2px 16px var(--shadow);
+      padding: 18px 4vw;
+      max-width: 420px;
+      width: 98vw;
+      margin: 18px auto 0 auto;
+      border: 2px solid var(--primary);
+      box-sizing: border-box;
       position: relative;
       overflow: hidden;
-      background: var(--card-bg) !important;
-      color: var(--text) !important;
-      box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
-      border: 2px solid var(--primary);
-    }
-    .menu-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      background: linear-gradient(120deg, #1de9b6 0%, #ff4081 100%);
-      opacity: 0.10;
-      z-index: 0;
-      pointer-events: none;
     }
     h1 {
-      color: #1de9b6;
-      margin-bottom: 30px;
-      text-shadow: 0 0 12px #1de9b6, 0 0 40px #7c4dff;
-      font-size: 2.2em;             /* Plus grand pour le titre */
-      letter-spacing: 2px;
-      font-family: 'Orbitron', 'Arial', sans-serif;
-      font-weight: 700;             /* Titre en gras */
-      line-height: 1.2;
-      position: relative;
-      z-index: 1;
+      font-size: 1.4em;
+      margin: 0 0 14px 0;
+      color: var(--primary);
+      text-align: center;
+      text-shadow: 0 0 8px var(--primary), 0 0 20px var(--secondary);
+      word-break: break-word;
     }
-    .menu-btn {
+    .desc, .scores, .explication {
+      font-size: 1em;
+      margin-bottom: 18px;
+      color: #fff;
+      text-align: center;
+    }
+    .scores, .scores li { color: #ff4081; }
+    .scores ul { list-style: none; padding: 0; margin: 8px 0 0 0; }
+    .scores li { color: #fff; font-size: .98em; }
+    .menu-btn, .accueil-btn, #restart, #back, #theme-toggle {
       display: block;
       width: 100%;
-      margin: 15px 0;
-      padding: 15px;
+      margin: 10px 0;
+      padding: 14px 0;
       border: none;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #1de9b6 0%, #7c4dff 100%);
-      color: #fff;
-      font-weight: 600;             /* Boutons en semi-gras */
-      font-size: 1.1em;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--text);
+      font-size: 1.08em;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      font-family: 'Orbitron', 'Arial', sans-serif;
+      box-shadow: 0 0 8px var(--secondary), 0 0 2px var(--accent);
+      transition: background .18s, box-shadow .18s, transform .18s;
+      font-family: 'Orbitron', Arial, sans-serif;
       outline: none;
-      position: relative;
-      z-index: 1;
-      line-height: 1.4;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%) !important;
-      color: var(--text) !important;
-      box-shadow: 0 0 10px var(--secondary), 0 0 2px var(--accent);
+      text-align: center;
+      user-select: none;
     }
-    .menu-btn:hover {
-      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
-      transform: scale(1.04);
-      box-shadow: 0 0 20px #ff4081, 0 0 8px #1de9b6;
+    .menu-btn:active, .accueil-btn:active, #restart:active, #back:active, #theme-toggle:active {
+      transform: scale(.97);
+      background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
     }
-    .card, .menu-card, .accueil-card {
-      background: var(--card-bg) !important;
-      color: var(--text) !important;
-      box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
-      border: 2px solid var(--primary);
+    #theme-toggle {
+      position:fixed;
+      top:10px;right:10px;
+      z-index:1000;
+      width:auto;
+      min-width:120px;
+      padding:10px 14px;
+      font-size:1em;
+      border-radius:6px;
+      box-shadow:0 0 8px var(--secondary),0 0 2px var(--accent);
     }
-    h1, .result, .scores, #scoreboard {
-      color: var(--primary) !important;
-      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
+    .categories-grid {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 8px;
     }
-    .menu-btn, .accueil-btn, #restart, #back, #theme-toggle {
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%) !important;
-      color: var(--text) !important;
-      box-shadow: 0 0 10px var(--secondary), 0 0 2px var(--accent);
+    .categories-grid > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 150px;
     }
-    .menu-btn:hover, .accueil-btn:hover, #restart:hover, #back:hover, #theme-toggle:hover {
-      background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%) !important;
-      box-shadow: 0 0 20px var(--accent), 0 0 8px var(--primary);
+    .categories-grid .menu-btn { width: 100%; min-width: 0; }
+    .accueil-unique-btn {
+      margin-top: 18px !important;
+      background: linear-gradient(90deg, #ff4081 0%, #ffe082 100%) !important;
+      color: #181c2f !important;
+      font-weight: bold !important;
+      border: 2px solid #ff4081 !important;
+      box-shadow: 0 0 12px #ff4081, 0 0 2px #ffe082 !important;
+      letter-spacing: 1.2px;
+      font-size: 1.08em !important;
+    }
+    .accueil-unique-btn:active {
+      background: linear-gradient(90deg, #ffe082 0%, #ff4081 100%) !important;
+      color: #ff4081 !important;
+    }
+    /* Mode clair */
+    :root[data-theme='light'] {
+      --bg: #f7f7fa;
+      --card-bg: #fff;
+      --text: #181c2f;
+      --primary: #1de9b6;
+      --secondary: #7c4dff;
+      --accent: #ff4081;
+      --shadow: #e0e0e0;
+    }
+    :root[data-theme='light'] .desc,
+    :root[data-theme='light'] .scores,
+    :root[data-theme='light'] .scores li { color: #181c2f !important; }
+    :root[data-theme='light'] .desc b { color: #1de9b6 !important; }
+    /* Responsive */
+    @media (max-width:600px) {
+      html, body { font-size: 15px !important; }
+      .card, .accueil-card, .menu-card { max-width: 99vw; padding: 10vw 2vw; border-radius: 8px; }
+      h1 { font-size: 1.1em !important; margin-bottom: 8px !important; }
+      .desc, .scores { font-size: .98em !important; margin-bottom: 12px !important; }
+      .menu-btn, .accueil-btn, #restart, #back, #theme-toggle { font-size: 1em !important; padding: 12px 0 !important; border-radius: 6px !important; }
+      .categories-grid { flex-direction: column; gap: 0; }
+      .categories-grid > div { width: 100%; gap: 0; }
     }
   </style>
 </head>
 <body>
-  <button id="theme-toggle" style="position:fixed;top:18px;right:18px;z-index:1000;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:'Orbitron',Arial,sans-serif;font-weight:600;background:linear-gradient(90deg,#1de9b6 0%,#7c4dff 100%);color:#fff;box-shadow:0 0 10px #7c4dff,0 0 2px #ff4081;transition:background 0.2s;">
-    Mode clair/sombre
-  </button>
+  <button id="theme-toggle">Clair / Sombre</button>
   <div class="menu-card">
     <h1>Choisissez une catégorie</h1>
-    <button class="menu-btn" onclick="startQuiz('culture')">Culture générale</button>
-    <button class="menu-btn" onclick="startQuiz('islam')">Culture islamique</button>
-    <button class="menu-btn" onclick="startQuiz('histoire')">Histoire</button>
-    <button class="menu-btn" onclick="startQuiz('geo')">Géographie</button>
-    <button class="menu-btn" onclick="startQuiz('sport')">Sport</button>
-    <button class="menu-btn" onclick="startQuiz('autres')">Autres</button>
-    <button class="menu-btn" style="margin-top:24px;background:linear-gradient(90deg,#ff4081 0%,#1de9b6 100%);" onclick="window.location.href='accueil.html'">Retour à l'accueil</button>
+    <div class="categories-grid">
+      <div>
+        <button class="menu-btn" onclick="startQuiz('culture')">Culture générale</button>
+        <button class="menu-btn" onclick="startQuiz('islam')">Culture islamique</button>
+        <button class="menu-btn" onclick="startQuiz('histoire')">Histoire</button>
+        <button class="menu-btn" onclick="startQuiz('geo')">Géographie</button>
+      </div>
+      <div>
+        <button class="menu-btn" onclick="startQuiz('sport')">Sport</button>
+        <button class="menu-btn" onclick="startQuiz('math')">Math</button>
+        <button class="menu-btn" onclick="startQuiz('autres')">Autres</button>
+        <button class="menu-btn accueil-unique-btn" onclick="window.location.href='accueil.html'">🏠 Retour à l'accueil</button>
+      </div>
+    </div>
   </div>
   <script>
-    function startQuiz(cat) {
-      window.location.href = `quizz.html?cat=${cat}`;
-    }
-  </script>
-  <script>
-    const quizzes = {
-      culture: [
-        { question: "Quelle est la capitale du Canada ?", answers: ["Toronto", "Ottawa", "Vancouver"], correct: "Ottawa" },
-        { question: "Quel est le plus grand pays du monde ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
-        { question: "Combien de couleurs sur le drapeau français ?", answers: ["2", "3", "4"], correct: "3" },
-        { question: "Quel est l’animal terrestre le plus rapide ?", answers: ["Guépard", "Lion", "Antilope"], correct: "Guépard" },
-        { question: "Quel est le plus haut sommet du monde ?", answers: ["Mont Blanc", "K2", "Everest"], correct: "Everest" },
-        { question: "Qui a peint la Joconde ?", answers: ["Vincent Van Gogh", "Léonard de Vinci", "Pablo Picasso"], correct: "Léonard de Vinci" },
-        { question: "Quelle planète est la plus proche du Soleil ?", answers: ["Vénus", "Mercure", "Mars"], correct: "Mercure" },
-        { question: "En quelle année l’homme a-t-il marché sur la Lune ?", answers: ["1969", "1972", "1959"], correct: "1969" },
-        { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
-        { question: "Combien y a-t-il de zéros dans un milliard ?", answers: ["6", "9", "12"], correct: "9" },
-        { question: "Quel animal est le symbole de la sagesse ?", answers: ["Chouette", "Lion", "Serpent"], correct: "Chouette" },
-        { question: "Quel pays a inventé les Jeux Olympiques ?", answers: ["Italie", "Grèce", "France"], correct: "Grèce" },
-        { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazon", "Yangtsé"], correct: "Amazon" },
-        { question: "Combien de côtés a un hexagone ?", answers: ["5", "6", "8"], correct: "6" },
-        { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Antoine de Saint-Exupéry", "Jules Verne"], correct: "Antoine de Saint-Exupéry" },
-        { question: "Quelle est la langue la plus parlée au monde ?", answers: ["Anglais", "Espagnol", "Mandarin"], correct: "Mandarin" },
-        { question: "Quel est le symbole chimique du fer ?", answers: ["Fe", "Ir", "Fr"], correct: "Fe" },
-        { question: "Dans quel pays se trouve la Tour de Pise ?", answers: ["Espagne", "Italie", "France"], correct: "Italie" },
-        { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Antarctique"], correct: "Antarctique" },
-        { question: "Combien de joueurs dans une équipe de football ?", answers: ["9", "10", "11"], correct: "11" },
-        { question: "Quel est l’élément chimique \"O\" ?", answers: ["Or", "Oxygène", "Osmium"], correct: "Oxygène" },
-        { question: "Quelle est la capitale de l’Australie ?", answers: ["Melbourne", "Canberra", "Sydney"], correct: "Canberra" },
-        { question: "Combien de continents existe-t-il ?", answers: ["5", "6", "7"], correct: "7" },
-        { question: "Quel est le plus grand lac d’Afrique ?", answers: ["Victoria", "Tanganyika", "Malawi"], correct: "Victoria" },
-        { question: "Quel est le plus grand mammifère marin ?", answers: ["Baleine bleue", "Orque", "Dauphin"], correct: "Baleine bleue" },
-        { question: "Quel pays a la plus grande population ?", answers: ["Inde", "Chine", "États-Unis"], correct: "Chine" },
-        { question: "Quel est le plus petit pays du monde ?", answers: ["Monaco", "Vatican", "Malte"], correct: "Vatican" },
-        { question: "Quel est l’inventeur de l’ampoule électrique ?", answers: ["Edison", "Tesla", "Franklin"], correct: "Edison" },
-        { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
-        { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" },
-        { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
-        { question: "Quel est le plus grand pays d’Afrique ?", answers: ["Algérie", "Nigeria", "Égypte"], correct: "Algérie" },
-        { question: "Quel est le plus grand port de France ?", answers: ["Le Havre", "Marseille", "Bordeaux"], correct: "Marseille" },
-        { question: "Quel est le plus grand désert chaud ?", answers: ["Sahara", "Gobi", "Kalahari"], correct: "Sahara" },
-        { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant" },
-        { question: "Quel est le plus grand oiseau ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
-        { question: "Quel est le plus grand pays d’Amérique du Sud ?", answers: ["Argentine", "Brésil", "Colombie"], correct: "Brésil" },
-        { question: "Quel est le plus grand fleuve d’Europe ?", answers: ["Danube", "Volga", "Rhin"], correct: "Volga" },
-        { question: "Quel est le plus grand état des États-Unis ?", answers: ["Texas", "Alaska", "Californie"], correct: "Alaska" },
-        { question: "Quel est le plus grand océan ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" }
-      ],
-      islam: [
-        { question: "Combien de prières obligatoires par jour en islam ?", answers: ["3", "5", "7"], correct: "5" },
-        { question: "Quel est le livre sacré de l’islam ?", answers: ["Bible", "Torah", "Coran"], correct: "Coran" },
-        { question: "Dans quelle ville est né le Prophète Mohammed ?", answers: ["Médine", "La Mecque", "Jérusalem"], correct: "La Mecque" },
-        { question: "Quel mois les musulmans jeûnent-ils ?", answers: ["Ramadan", "Chawwal", "Mouharram"], correct: "Ramadan" },
-        { question: "Combien de sourates dans le Coran ?", answers: ["114", "99", "120"], correct: "114" },
-        { question: "Quel est le premier pilier de l’islam ?", answers: ["La prière", "La profession de foi", "Le jeûne"], correct: "La profession de foi" },
-        { question: "Quel prophète a construit l’arche ?", answers: ["Moussa", "Nouh", "Ibrahim"], correct: "Nouh" },
-        { question: "Dans quelle ville se trouve la mosquée Al-Aqsa ?", answers: ["La Mecque", "Médine", "Jérusalem"], correct: "Jérusalem" },
-        { question: "Comment s’appelle le dernier prophète de l’islam ?", answers: ["Issa", "Moussa", "Mohammed"], correct: "Mohammed" },
-        { question: "Combien de fois par an a lieu le pèlerinage (Hajj) ?", answers: ["1", "2", "3"], correct: "1" },
-        // Questions plus difficiles :
-        { question: "Quel ange a transmis la révélation au Prophète Mohammed ?", answers: ["Mikaël", "Israfil", "Jibril"], correct: "Jibril" },
-        { question: "Quel calife a rassemblé le Coran sous forme de livre ?", answers: ["Abou Bakr", "Omar", "Othman"], correct: "Othman" },
-        { question: "Combien de versets (ayat) dans le Coran ?", answers: ["6236", "6666", "114"], correct: "6236" },
-        { question: "Quel est le nom de la grotte où le Prophète a reçu la première révélation ?", answers: ["Hira", "Thawr", "Safa"], correct: "Hira" },
-        { question: "Quel est le nom du père du Prophète Mohammed ?", answers: ["Abdallah", "Abou Talib", "Abdelmouttalib"], correct: "Abdallah" },
-        { question: "Quel est le nom de la mère du Prophète Mohammed ?", answers: ["Amina", "Khadija", "Fatima"], correct: "Amina" },
-        { question: "Quel est le deuxième calife de l'islam ?", answers: ["Omar", "Ali", "Othman"], correct: "Omar" },
-        { question: "Quelle sourate commence sans Bismillah ?", answers: ["At-Tawba", "Al-Fatiha", "Al-Baqara"], correct: "At-Tawba" },
-        { question: "Quel est le nom du puits célèbre à La Mecque ?", answers: ["Zamzam", "Bir Barhout", "Aïn Zarka"], correct: "Zamzam" },
-        { question: "Combien de jours dure le jeûne du Ramadan ?", answers: ["29 ou 30", "31", "28"], correct: "29 ou 30" }
-      ],
-      histoire: [
-        { question: "En quelle année a eu lieu la Révolution française ?", answers: ["1789", "1848", "1914"], correct: "1789" },
-        { question: "Qui était le premier président des États-Unis ?", answers: ["Lincoln", "Washington", "Jefferson"], correct: "Washington" },
-        { question: "Quel empire a construit le Colisée ?", answers: ["Grec", "Romain", "Égyptien"], correct: "Romain" },
-        { question: "Qui a découvert l’Amérique ?", answers: ["Christophe Colomb", "Vasco de Gama", "Magellan"], correct: "Christophe Colomb" },
-        { question: "Quel roi fut surnommé le Roi Soleil ?", answers: ["Louis XIV", "Louis XVI", "François Ier"], correct: "Louis XIV" },
-        { question: "En quelle année a commencé la Première Guerre mondiale ?", answers: ["1914", "1939", "1815"], correct: "1914" },
-        { question: "Qui a inventé l’imprimerie ?", answers: ["Gutenberg", "Edison", "Pasteur"], correct: "Gutenberg" },
-        { question: "Où se trouve la pyramide de Khéops ?", answers: ["Gizeh", "Louxor", "Saqqarah"], correct: "Gizeh" },
-        { question: "Quel pays a construit la Grande Muraille ?", answers: ["Chine", "Japon", "Inde"], correct: "Chine" },
-        { question: "Qui était Cléopâtre ?", answers: ["Reine d’Égypte", "Impératrice de Rome", "Reine de Perse"], correct: "Reine d’Égypte" },
-        { question: "Qui a été le premier homme à marcher sur la Lune ?", answers: ["Neil Armstrong", "Buzz Aldrin", "Youri Gagarine"], correct: "Neil Armstrong" },
-        { question: "Quel événement a marqué la fin de la Seconde Guerre mondiale ?", answers: ["Chute de Berlin", "Débarquement de Normandie", "Capitulation du Japon"], correct: "Capitulation du Japon" },
-        { question: "Qui était le chef des Gaulois lors de la guerre contre Jules César ?", answers: ["Vercingétorix", "Astérix", "Charlemagne"], correct: "Vercingétorix" },
-        { question: "En quelle année a eu lieu la chute du mur de Berlin ?", answers: ["1989", "1991", "1975"], correct: "1989" },
-        { question: "Quel pharaon a fait construire la grande pyramide ?", answers: ["Khéops", "Ramsès II", "Toutankhamon"], correct: "Khéops" },
-        { question: "Qui a écrit 'Le Prince' ?", answers: ["Machiavel", "Platon", "Aristote"], correct: "Machiavel" },
-        { question: "Quel pays a été dirigé par Nelson Mandela ?", answers: ["Afrique du Sud", "Kenya", "Nigéria"], correct: "Afrique du Sud" },
-        { question: "Qui a été le premier empereur de France ?", answers: ["Napoléon Bonaparte", "Louis XVI", "Charlemagne"], correct: "Napoléon Bonaparte" },
-        { question: "Quel traité a mis fin à la Première Guerre mondiale ?", answers: ["Versailles", "Tordesillas", "Vienne"], correct: "Versailles" },
-        { question: "Qui a découvert la pénicilline ?", answers: ["Alexander Fleming", "Louis Pasteur", "Marie Curie"], correct: "Alexander Fleming" }
-      ],
-      geo: [
-        { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
-        { question: "Combien de continents existe-t-il ?", answers: ["5", "6", "7"], correct: "7" },
-        { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Antarctique"], correct: "Antarctique" },
-        { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazon", "Yangtsé"], correct: "Amazon" },
-        { question: "Dans quel pays se trouve le Kilimandjaro ?", answers: ["Kenya", "Tanzanie", "Afrique du Sud"], correct: "Tanzanie" },
-        { question: "Quelle est la capitale du Brésil ?", answers: ["Rio", "Brasilia", "São Paulo"], correct: "Brasilia" },
-        { question: "Quel est le plus grand lac d’Afrique ?", answers: ["Victoria", "Tanganyika", "Malawi"], correct: "Victoria" },
-        { question: "Quel pays a la plus grande superficie ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
-        { question: "Quel est le plus haut sommet d’Europe ?", answers: ["Mont Blanc", "Elbrouz", "Matterhorn"], correct: "Elbrouz" },
-        { question: "Quel est le plus grand pays d’Amérique du Sud ?", answers: ["Argentine", "Brésil", "Colombie"], correct: "Brésil" }
-      ],
-      autres: [
-        { question: "Quel est l’élément chimique \"O\" ?", answers: ["Or", "Oxygène", "Osmium"], correct: "Oxygène" },
-        { question: "Quel est le plus grand mammifère marin ?", answers: ["Baleine bleue", "Orque", "Dauphin"], correct: "Baleine bleue" },
-        { question: "Quel est le plus grand oiseau ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
-        { question: "Combien de côtés a un hexagone ?", answers: ["5", "6", "8"], correct: "6" },
-        { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Antoine de Saint-Exupéry", "Jules Verne"], correct: "Antoine de Saint-Exupéry" },
-        { question: "Quel est le symbole chimique du fer ?", answers: ["Fe", "Ir", "Fr"], correct: "Fe" },
-        { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant" },
-        { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
-        { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
-        { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" }
-      ],
-      sport: [
-        { question: "Quel pays a remporté la Coupe du Monde de football en 1998 ?", answers: ["Brésil", "France", "Italie"], correct: "France" },
-        { question: "Combien de joueurs dans une équipe de rugby à XV ?", answers: ["13", "15", "11"], correct: "15" },
-        { question: "Quel est le sport le plus pratiqué au monde ?", answers: ["Football", "Basketball", "Cricket"], correct: "Football" },
-        { question: "Qui détient le record du monde du 100 mètres ?", answers: ["Usain Bolt", "Carl Lewis", "Jesse Owens"], correct: "Usain Bolt" },
-        { question: "Quel pays a remporté le plus de médailles aux Jeux Olympiques d'été ?", answers: ["États-Unis", "URSS", "Chine"], correct: "États-Unis" },
-        { question: "Quel est le plus grand stade du monde en capacité ?", answers: ["Maracanã", "Camp Nou", "Wembley"], correct: "Maracanã" },
-        { question: "Qui est le joueur de tennis avec le plus de titres du Grand Chelem ?", answers: ["Roger Federer", "Rafael Nadal", "Novak Djokovic"], correct: "Roger Federer" },
-        { question: "Quel sport se pratique sur une piste ovale ?", answers: ["Athlétisme", "Cyclisme", "Natation"], correct: "Cyclisme" },
-        { question: "Quel est le poids d'un ballon de football professionnel ?", answers: ["350-370g", "400-420g", "300-320g"], correct: "410-450g" },
-        { question: "Qui a remporté le premier Ballon d'Or ?", answers: ["Lionel Messi", "Cristiano Ronaldo", "Alfredo Di Stéfano"], correct: "Alfredo Di Stéfano" }
-      ]
-    };
-  </script>
-  <script>
-    function getCategory() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get('cat') || 'culture';
-    }
-  </script>
-  <script>
-    function goBack() {
-      window.location.href = "index.html";
-    }
-  </script>
-  <script>
-    // Palette claire
+    // Thème clair/sombre ultra-rapide
     const lightTheme = {
-      '--bg': '#f7f7fa',
-      '--card-bg': '#fff',
-      '--text': '#181c2f',
-      '--primary': '#1de9b6',
-      '--secondary': '#7c4dff',
-      '--accent': '#ff4081',
-      '--shadow': '#e0e0e0'
+      '--bg': '#f7f7fa','--card-bg': '#fff','--text': '#181c2f','--primary': '#1de9b6','--secondary': '#7c4dff','--accent': '#ff4081','--shadow': '#e0e0e0'
+    }, darkTheme = {
+      '--bg': '#181c2f','--card-bg': 'rgba(24,28,47,0.97)','--text': '#fff','--primary': '#1de9b6','--secondary': '#7c4dff','--accent': '#ff4081','--shadow': '#7c4dff'
     };
-    // Palette sombre (par défaut)
-    const darkTheme = {
-      '--bg': '#181c2f',
-      '--card-bg': 'rgba(24,28,47,0.97)',
-      '--text': '#fff',
-      '--primary': '#1de9b6',
-      '--secondary': '#7c4dff',
-      '--accent': '#ff4081',
-      '--shadow': '#7c4dff'
-    };
-    // Applique le thème
-    function applyTheme(theme) {
-      for (const key in theme) {
-        document.documentElement.style.setProperty(key, theme[key]);
-      }
+    function applyTheme(theme, mode) {
+      for (const key in theme) document.documentElement.style.setProperty(key, theme[key]);
+      document.documentElement.setAttribute('data-theme', mode);
     }
-    // Détecte le thème actuel
-    function isDark() {
-      return (localStorage.getItem('theme') || 'dark') === 'dark';
-    }
-    // Initialise le thème au chargement
-    function initTheme() {
-      if (isDark()) applyTheme(darkTheme);
-      else applyTheme(lightTheme);
-    }
-    // Toggle
+    function isDark() { return (localStorage.getItem('theme') || 'dark') === 'dark'; }
+    function initTheme() { isDark() ? applyTheme(darkTheme, 'dark') : applyTheme(lightTheme, 'light'); }
     document.getElementById('theme-toggle').onclick = function() {
       const dark = isDark();
       localStorage.setItem('theme', dark ? 'light' : 'dark');
       initTheme();
     };
     initTheme();
+    // Exemple de fonction pour lancer un quiz (à adapter selon ton JS)
+    function startQuiz(cat) {
+      window.location.href = `quizz.html?cat=${cat}`;
+    }
   </script>
 </body>
 </html>

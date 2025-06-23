@@ -289,78 +289,122 @@
   </script>
 
   <script>
+// Ajoute ou complète chaque catégorie dans ton objet questionsByCategory :
+
 const questionsByCategory = {
   culture: [
-    { question: "Quelle est la capitale du Canada ?", answers: ["Toronto", "Ottawa", "Vancouver"], correct: "Ottawa" },
-    { question: "Quel est le plus grand pays du monde ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
-    { question: "Combien de couleurs sur le drapeau français ?", answers: ["2", "3", "4"], correct: "3" },
-    { question: "Quel est l’animal terrestre le plus rapide ?", answers: ["Guépard", "Lion", "Antilope"], correct: "Guépard" },
-    { question: "Quel est le plus haut sommet du monde ?", answers: ["Mont Blanc", "K2", "Everest"], correct: "Everest" },
-    { question: "Qui a peint la Joconde ?", answers: ["Vincent Van Gogh", "Léonard de Vinci", "Pablo Picasso"], correct: "Léonard de Vinci" },
-    { question: "Quelle planète est la plus proche du Soleil ?", answers: ["Vénus", "Mercure", "Mars"], correct: "Mercure" },
-    { question: "En quelle année l’homme a-t-il marché sur la Lune ?", answers: ["1969", "1972", "1959"], correct: "1969" },
     { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
-    { question: "Combien y a-t-il de zéros dans un milliard ?", answers: ["6", "9", "12"], correct: "9" }
+    { question: "Qui a peint la Joconde ?", answers: ["Van Gogh", "Léonard de Vinci", "Picasso"], correct: "Léonard de Vinci" },
+    { question: "Combien y a-t-il de continents ?", answers: ["5", "6", "7"], correct: "7" },
+    { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazone", "Yangtsé"], correct: "Amazone" },
+    { question: "Dans quel pays se trouve la Tour Eiffel ?", answers: ["Italie", "France", "Espagne"], correct: "France" },
+    { question: "Quel est le symbole chimique de l’eau ?", answers: ["O2", "H2O", "CO2"], correct: "H2O" },
+    { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Saint-Exupéry", "Molière"], correct: "Saint-Exupéry" },
+    { question: "Quel est l’animal le plus rapide du monde ?", answers: ["Guépard", "Aigle", "Lion"], correct: "Guépard" },
+    { question: "Combien de couleurs dans l’arc-en-ciel ?", answers: ["5", "7", "9"], correct: "7" },
+    { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Kalahari"], correct: "Sahara" }
   ],
   islam: [
-    { question: "Combien de prières obligatoires par jour en islam ?", answers: ["3", "5", "7"], correct: "5" },
-    { question: "Quel est le livre sacré de l’islam ?", answers: ["Bible", "Torah", "Coran"], correct: "Coran" },
-    { question: "Dans quelle ville est né le Prophète Mohammed ?", answers: ["Médine", "La Mecque", "Jérusalem"], correct: "La Mecque" },
-    { question: "Quel mois les musulmans jeûnent-ils ?", answers: ["Ramadan", "Chawwal", "Mouharram"], correct: "Ramadan" },
-    { question: "Combien de sourates dans le Coran ?", answers: ["114", "99", "120"], correct: "114" },
-    { question: "Quel est le premier pilier de l’islam ?", answers: ["La prière", "La profession de foi", "Le jeûne"], correct: "La profession de foi" },
-    { question: "Quel prophète a construit l’arche ?", answers: ["Moussa", "Nouh", "Ibrahim"], correct: "Nouh" },
-    { question: "Dans quelle ville se trouve la mosquée Al-Aqsa ?", answers: ["La Mecque", "Médine", "Jérusalem"], correct: "Jérusalem" },
-    { question: "Comment s’appelle le dernier prophète de l’islam ?", answers: ["Issa", "Moussa", "Mohammed"], correct: "Mohammed" },
-    { question: "Combien de fois par an a lieu le pèlerinage (Hajj) ?", answers: ["1", "2", "3"], correct: "1" }
+    { question: "Combien de piliers de l’Islam ?", answers: ["3", "5", "7"], correct: "5" },
+    { question: "Quel est le livre sacré de l’Islam ?", answers: ["Bible", "Torah", "Coran"], correct: "Coran" },
+    { question: "Dans quelle ville est né le Prophète Muhammad ?", answers: ["Médine", "La Mecque", "Jérusalem"], correct: "La Mecque" },
+    { question: "Quel mois est dédié au jeûne ?", answers: ["Chawwal", "Ramadan", "Dhou al-Hijja"], correct: "Ramadan" },
+    { question: "Combien de prières quotidiennes ?", answers: ["3", "5", "7"], correct: "5" },
+    { question: "Quel est le premier calife ?", answers: ["Ali", "Omar", "Abou Bakr"], correct: "Abou Bakr" },
+    { question: "Quel animal a transporté le Prophète lors de l’Isra et Miraj ?", answers: ["Chameau", "Bouraq", "Cheval"], correct: "Bouraq" },
+    { question: "Quel est le nom du dernier Prophète ?", answers: ["Moussa", "Issa", "Muhammad"], correct: "Muhammad" },
+    { question: "Où se trouve la Kaaba ?", answers: ["Médine", "La Mecque", "Bagdad"], correct: "La Mecque" },
+    { question: "Quel est le jour sacré de la semaine ?", answers: ["Samedi", "Dimanche", "Vendredi"], correct: "Vendredi" }
   ],
   histoire: [
-    { question: "En quelle année a eu lieu la Révolution française ?", answers: ["1789", "1848", "1914"], correct: "1789" },
-    { question: "Qui était le premier président des États-Unis ?", answers: ["Lincoln", "Washington", "Jefferson"], correct: "Washington" },
+    { question: "Qui était Napoléon Bonaparte ?", answers: ["Un roi", "Un empereur", "Un peintre"], correct: "Un empereur" },
+    { question: "En quelle année a eu lieu la Révolution française ?", answers: ["1789", "1815", "1914"], correct: "1789" },
+    { question: "Qui a découvert l’Amérique ?", answers: ["Magellan", "Christophe Colomb", "Vasco de Gama"], correct: "Christophe Colomb" },
+    { question: "Quel mur est tombé en 1989 ?", answers: ["Mur de Berlin", "Mur de Chine", "Mur d’Hadrien"], correct: "Mur de Berlin" },
+    { question: "Qui était Cléopâtre ?", answers: ["Une reine d’Égypte", "Une déesse grecque", "Une impératrice romaine"], correct: "Une reine d’Égypte" },
+    { question: "Quel roi a eu pour surnom 'le Roi Soleil' ?", answers: ["Louis XIV", "Louis XVI", "Henri IV"], correct: "Louis XIV" },
+    { question: "Où se trouve la cité antique de Machu Picchu ?", answers: ["Pérou", "Mexique", "Brésil"], correct: "Pérou" },
+    { question: "Qui a inventé l’imprimerie ?", answers: ["Gutenberg", "Pasteur", "Newton"], correct: "Gutenberg" },
     { question: "Quel empire a construit le Colisée ?", answers: ["Grec", "Romain", "Égyptien"], correct: "Romain" },
-    { question: "Qui a découvert l’Amérique ?", answers: ["Christophe Colomb", "Vasco de Gama", "Magellan"], correct: "Christophe Colomb" },
-    { question: "Quel roi fut surnommé le Roi Soleil ?", answers: ["Louis XIV", "Louis XVI", "François Ier"], correct: "Louis XIV" },
-    { question: "En quelle année a commencé la Première Guerre mondiale ?", answers: ["1914", "1939", "1815"], correct: "1914" },
-    { question: "Qui a inventé l’imprimerie ?", answers: ["Gutenberg", "Edison", "Pasteur"], correct: "Gutenberg" },
-    { question: "Où se trouve la pyramide de Khéops ?", answers: ["Gizeh", "Louxor", "Saqqarah"], correct: "Gizeh" },
-    { question: "Quel pays a construit la Grande Muraille ?", answers: ["Chine", "Japon", "Inde"], correct: "Chine" },
-    { question: "Qui était Cléopâtre ?", answers: ["Reine d’Égypte", "Impératrice de Rome", "Reine de Perse"], correct: "Reine d’Égypte" }
+    { question: "Qui était Jeanne d’Arc ?", answers: ["Une reine", "Une guerrière", "Une scientifique"], correct: "Une guerrière" }
   ],
   geo: [
-    { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
-    { question: "Combien de continents existe-t-il ?", answers: ["5", "6", "7"], correct: "7" },
-    { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Antarctique"], correct: "Antarctique" },
-    { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazon", "Yangtsé"], correct: "Amazon" },
-    { question: "Dans quel pays se trouve le Kilimandjaro ?", answers: ["Kenya", "Tanzanie", "Afrique du Sud"], correct: "Tanzanie" },
-    { question: "Quelle est la capitale du Brésil ?", answers: ["Rio", "Brasilia", "São Paulo"], correct: "Brasilia" },
-    { question: "Quel est le plus grand lac d’Afrique ?", answers: ["Victoria", "Tanganyika", "Malawi"], correct: "Victoria" },
-    { question: "Quel pays a la plus grande superficie ?", answers: ["Chine", "États-Unis", "Russie"], correct: "Russie" },
-    { question: "Quel est le plus haut sommet d’Europe ?", answers: ["Mont Blanc", "Elbrouz", "Matterhorn"], correct: "Elbrouz" },
-    { question: "Quel est le plus grand pays d’Amérique du Sud ?", answers: ["Argentine", "Brésil", "Colombie"], correct: "Brésil" }
+    { question: "Quel est le plus grand pays du monde ?", answers: ["Canada", "Russie", "Chine"], correct: "Russie" },
+    { question: "Où se trouve le Kilimandjaro ?", answers: ["Kenya", "Tanzanie", "Afrique du Sud"], correct: "Tanzanie" },
+    { question: "Quel est le plus long fleuve d’Afrique ?", answers: ["Nil", "Congo", "Niger"], correct: "Nil" },
+    { question: "Quelle est la capitale du Japon ?", answers: ["Pékin", "Tokyo", "Séoul"], correct: "Tokyo" },
+    { question: "Quel océan borde la côte ouest de l’Afrique ?", answers: ["Atlantique", "Indien", "Arctique"], correct: "Atlantique" },
+    { question: "Quel pays a la plus grande population ?", answers: ["Inde", "Chine", "États-Unis"], correct: "Chine" },
+    { question: "Quel est le plus haut sommet du monde ?", answers: ["K2", "Everest", "Mont Blanc"], correct: "Everest" },
+    { question: "Dans quel pays se trouve la ville de Sydney ?", answers: ["Australie", "Nouvelle-Zélande", "Canada"], correct: "Australie" },
+    { question: "Quel est le plus grand désert chaud ?", answers: ["Sahara", "Gobi", "Kalahari"], correct: "Sahara" },
+    { question: "Quelle mer sépare l’Europe de l’Afrique ?", answers: ["Mer Rouge", "Méditerranée", "Mer Noire"], correct: "Méditerranée" }
+  ],
+  sport: [
+    { question: "Quel pays a remporté la Coupe du Monde 2018 ?", answers: ["France", "Brésil", "Allemagne"], correct: "France" },
+    { question: "Combien de joueurs dans une équipe de football ?", answers: ["9", "10", "11"], correct: "11" },
+    { question: "Quel est le sport de Michael Jordan ?", answers: ["Football", "Basketball", "Tennis"], correct: "Basketball" },
+    { question: "Combien de points pour un essai au rugby ?", answers: ["3", "5", "7"], correct: "5" },
+    { question: "Dans quel pays sont nés les Jeux Olympiques ?", answers: ["Italie", "Grèce", "France"], correct: "Grèce" },
+    { question: "Quel est le surnom d’Usain Bolt ?", answers: ["La Fusée", "L’Éclair", "La Flèche"], correct: "L’Éclair" },
+    { question: "Combien de sets pour gagner un match de tennis masculin en Grand Chelem ?", answers: ["2", "3", "5"], correct: "3" },
+    { question: "Quel est le record du 100m (en secondes) ?", answers: ["9.58", "9.72", "9.63"], correct: "9.58" },
+    { question: "Combien de joueurs sur le terrain au basket (une équipe) ?", answers: ["5", "6", "7"], correct: "5" },
+    { question: "Quel pays a gagné le plus de médailles olympiques ?", answers: ["Chine", "États-Unis", "Russie"], correct: "États-Unis" },
+    { question: "Quel est le sport le plus pratiqué au monde ?", answers: ["Football", "Basketball", "Tennis"], correct: "Football" },
+    { question: "Combien de joueurs dans une équipe de volley-ball ?", answers: ["5", "6", "7"], correct: "6" },
+    { question: "Quel est le pays d’origine du judo ?", answers: ["Chine", "Japon", "Corée"], correct: "Japon" },
+    { question: "Combien de minutes dure un match de football ?", answers: ["90", "80", "100"], correct: "90" },
+    { question: "Quel est le record du saut en longueur masculin (en mètres) ?", answers: ["8.95", "9.10", "8.50"], correct: "8.95" },
+    { question: "Quel est le sport de Serena Williams ?", answers: ["Tennis", "Golf", "Basketball"], correct: "Tennis" },
+    { question: "Combien de joueurs dans une équipe de handball ?", answers: ["7", "6", "8"], correct: "7" },
+    { question: "Quel est le pays d’origine du rugby ?", answers: ["Angleterre", "France", "Australie"], correct: "Angleterre" },
+    { question: "Quel est le sport de Tony Parker ?", answers: ["Basketball", "Football", "Rugby"], correct: "Basketball" },
+    { question: "Combien de tours dans une course de 400m ?", answers: ["1", "2", "4"], correct: "1" }
+  ],
+  math: [
+    { question: "Combien font 7 + 5 ?", answers: ["11", "12", "13"], correct: "12" },
+    { question: "Quel est le résultat de 6 × 8 ?", answers: ["42", "48", "54"], correct: "48" },
+    { question: "Combien font 36 ÷ 6 ?", answers: ["5", "6", "7"], correct: "6" },
+    { question: "Qui est considéré comme le père de la géométrie ?", answers: ["Euclide", "Pythagore", "Archimède"], correct: "Euclide" },
+    { question: "Quel est le carré de 9 ?", answers: ["18", "81", "27"], correct: "81" },
+    { question: "Quel mathématicien grec a donné son nom à un célèbre théorème sur les triangles rectangles ?", answers: ["Pythagore", "Thalès", "Eratosthène"], correct: "Pythagore" },
+    { question: "Combien font 15 – 7 ?", answers: ["8", "7", "9"], correct: "8" },
+    { question: "Quel est le résultat de 5 × 7 ?", answers: ["35", "25", "30"], correct: "35" },
+    { question: "Quel mathématicien a inventé le symbole ∞ pour l’infini ?", answers: ["Newton", "Leibniz", "John Wallis"], correct: "John Wallis" },
+    { question: "Combien font 100 ÷ 4 ?", answers: ["20", "25", "30"], correct: "25" },
+    { question: "Combien font 9 × 9 ?", answers: ["81", "72", "99"], correct: "81" },
+    { question: "Quel est le résultat de 49 ÷ 7 ?", answers: ["6", "7", "8"], correct: "7" },
+    { question: "Qui a développé la théorie de la relativité ?", answers: ["Einstein", "Newton", "Gauss"], correct: "Einstein" },
+    { question: "Combien font 13 + 17 ?", answers: ["30", "29", "31"], correct: "30" },
+    { question: "Quel est le résultat de 8 × 7 ?", answers: ["54", "56", "64"], correct: "56" },
+    { question: "Quel est le nom du mathématicien indien célèbre pour ses formules ?", answers: ["Ramanujan", "Gauss", "Euler"], correct: "Ramanujan" },
+    { question: "Combien font 144 ÷ 12 ?", answers: ["10", "12", "14"], correct: "12" },
+    { question: "Quel est le résultat de 100 – 37 ?", answers: ["63", "73", "67"], correct: "63" },
+    { question: "Quel est le nombre PI arrondi à 2 décimales ?", answers: ["3.14", "3.15", "3.13"], correct: "3.14" },
+    { question: "Quel mathématicien a donné son nom à une suite célèbre ?", answers: ["Fibonacci", "Pascal", "Descartes"], correct: "Fibonacci" }
   ],
   autres: [
-    { question: "Quel est l’élément chimique \"O\" ?", answers: ["Or", "Oxygène", "Osmium"], correct: "Oxygène" },
-    { question: "Quel est le plus grand mammifère marin ?", answers: ["Baleine bleue", "Orque", "Dauphin"], correct: "Baleine bleue" },
-    { question: "Quel est le plus grand oiseau ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
-    { question: "Combien de côtés a un hexagone ?", answers: ["5", "6", "8"], correct: "6" },
-    { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Antoine de Saint-Exupéry", "Jules Verne"], correct: "Antoine de Saint-Exupéry" },
-    { question: "Quel est le symbole chimique du fer ?", answers: ["Fe", "Ir", "Fr"], correct: "Fe" },
     { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant" },
     { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
     { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
-    { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" }
-  ],
-  sport: [
-    { question: "Quel pays a remporté la Coupe du Monde de football 2018 ?", answers: ["Brésil", "France", "Allemagne"], correct: "France", difficulty: "facile" },
-    { question: "Combien de joueurs dans une équipe de football ?", answers: ["9", "10", "11"], correct: "11", difficulty: "facile" },
-    { question: "Quel est le sport de Michael Jordan ?", answers: ["Football", "Basketball", "Tennis"], correct: "Basketball", difficulty: "facile" },
-    { question: "Combien de points pour un essai au rugby ?", answers: ["3", "5", "7"], correct: "5", difficulty: "moyenne" },
-    { question: "Dans quel pays sont nés les Jeux Olympiques ?", answers: ["Italie", "Grèce", "France"], correct: "Grèce", difficulty: "facile" },
-    { question: "Quel est le surnom d’Usain Bolt ?", answers: ["La Fusée", "L’Éclair", "La Flèche"], correct: "L’Éclair", difficulty: "moyenne" },
-    { question: "Combien de sets pour gagner un match de tennis masculin en Grand Chelem ?", answers: ["2", "3", "5"], correct: "3", difficulty: "moyenne" },
-    { question: "Quel est le record du 100m (en secondes) ?", answers: ["9.58", "9.72", "9.63"], correct: "9.58", difficulty: "difficile" },
-    { question: "Combien de joueurs sur le terrain au basket (une équipe) ?", answers: ["5", "6", "7"], correct: "5", difficulty: "facile" },
-    { question: "Quel pays a gagné le plus de médailles olympiques ?", answers: ["Chine", "États-Unis", "Russie"], correct: "États-Unis", difficulty: "difficile" }
+    { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" },
+    { question: "Quel est l’animal qui pond le plus d’œufs ?", answers: ["Poule", "Poisson-lune", "Autruche"], correct: "Poisson-lune" },
+    { question: "Quel est le fruit le plus consommé au monde ?", answers: ["Banane", "Pomme", "Orange"], correct: "Banane" },
+    { question: "Quel est le plus grand lac d’eau douce ?", answers: ["Lac Baïkal", "Lac Supérieur", "Lac Victoria"], correct: "Lac Supérieur" },
+    { question: "Quel est le plus grand mammifère marin ?", answers: ["Orque", "Baleine bleue", "Dauphin"], correct: "Baleine bleue" },
+    { question: "Quel est le plus haut arbre du monde ?", answers: ["Séquoia", "Chêne", "Baobab"], correct: "Séquoia" },
+    { question: "Quel est le plus petit pays du monde ?", answers: ["Monaco", "Vatican", "Saint-Marin"], correct: "Vatican" },
+    { question: "Quel est le plus grand oiseau du monde ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
+    { question: "Quel est l’instrument de musique à cordes le plus grand ?", answers: ["Contrebasse", "Guitare", "Violon"], correct: "Contrebasse" },
+    { question: "Quel est le plus grand désert froid ?", answers: ["Antarctique", "Arctique", "Gobi"], correct: "Antarctique" },
+    { question: "Quel est le plus long film d’animation Disney ?", answers: ["Fantasia", "Le Roi Lion", "La Reine des Neiges"], correct: "Fantasia" },
+    { question: "Quel est le plus grand reptile ?", answers: ["Crocodile marin", "Python", "Iguane"], correct: "Crocodile marin" },
+    { question: "Quel est le plus grand nombre premier à un chiffre ?", answers: ["7", "9", "5"], correct: "7" },
+    { question: "Quel est le plus grand océan ?", answers: ["Atlantique", "Pacifique", "Indien"], correct: "Pacifique" },
+    { question: "Quel est le plus grand insecte ?", answers: ["Phasme", "Scarabée", "Libellule"], correct: "Phasme" },
+    { question: "Quel est le plus grand félin ?", answers: ["Tigre", "Lion", "Léopard"], correct: "Tigre" },
+    { question: "Quel est le plus grand poisson ?", answers: ["Requin-baleine", "Thon", "Espadon"], correct: "Requin-baleine" }
   ]
 };
 
@@ -424,8 +468,19 @@ let userAnswers = [];
 { question: "...", answers: [...], correct: "...", explication: "Petite anecdote ou explication." }
 */
 
+function isMathOperationQuestion(q) {
+  // Vérifie si la question contient +, -, ×, x, *, ou ÷ ou "addition", "soustraction", "multiplication", "division"
+  const opRegex = /(\+|\-|\×|x|\*|÷|addition|soustraction|multiplication|division)/i;
+  return opRegex.test(q.question);
+}
+
 function showQuestion() {
   clearInterval(timerInterval);
+  // Timer plus rapide pour les opérations mathématiques simples
+  let thisTimerDuration = timerDuration;
+  if (cat === "math" && isMathOperationQuestion(questions[current])) {
+    thisTimerDuration = 7; // 7 secondes pour les opérations
+  }
   timerBar.style.display = timerEnabled ? "block" : "none";
   if (current >= questions.length) {
     showFinalScore();
@@ -443,11 +498,11 @@ function showQuestion() {
     </div>
   `;
   if (timerEnabled) {
-    let timeLeft = timerDuration;
+    let timeLeft = thisTimerDuration;
     timerProgress.style.width = "100%";
     timerInterval = setInterval(() => {
       timeLeft--;
-      timerProgress.style.width = (timeLeft / timerDuration * 100) + "%";
+      timerProgress.style.width = (timeLeft / thisTimerDuration * 100) + "%";
       if (timeLeft <= 0) {
         clearInterval(timerInterval);
         const resultDiv = quizDiv.querySelector('.result');
@@ -492,66 +547,28 @@ function goBack() {
 }
 
 function showFinalScore() {
-  let message = "";
   const ratio = score / questions.length;
   const percent = Math.round(ratio * 100);
-  if (ratio === 1) message = "🎉 Parfait ! Tu es incollable !";
-  else if (ratio >= 0.8) message = "👏 Très bien !";
-  else if (ratio >= 0.5) message = "👍 Pas mal, continue à t'entraîner !";
-  else message = "💡 Tu peux progresser, réessaie !";
 
-  // Sauvegarde du score dans le localStorage
-  const scoresKey = 'quizScores';
-  let scores = [];
-  try {
-    scores = JSON.parse(localStorage.getItem(scoresKey)) || [];
-  } catch(e) {}
-  const now = new Date();
-  const dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString().slice(0,5);
-  scores.push({
-    date: dateStr,
-    theme: titles[cat] || cat,
-    score: `${score}/${questions.length}`,
-    percent: percent
-  });
-  // On garde les 10 meilleurs scores (par pourcentage décroissant)
-  scores = scores.sort((a, b) => b.percent - a.percent).slice(0, 10);
-  localStorage.setItem(scoresKey, JSON.stringify(scores));
+  // Prépare la liste des erreurs
+  let erreurs = userAnswers
+    .map((a, i) => a.user !== a.correct ? {
+      question: a.question,
+      user: a.user,
+      correct: a.correct
+    } : null)
+    .filter(x => x);
 
-  // Affichage du score final
-  let reviewHtml = userAnswers.map((a, i) =>
-    `<li style="margin-bottom:8px;">
-      <b>Q${i+1}.</b> ${a.question}<br>
-      <span style="color:${a.user === a.correct ? 'green':'#ff4081'}">
-        Ta réponse : ${a.user ? a.user : "<i>aucune</i>"}
-      </span>
-      <br>
-      <span style="color:#1de9b6">Bonne réponse : ${a.correct}</span>
-    </li>`
-  ).join('');
+  // Stocke score et erreurs dans le localStorage pour la page finale
+  localStorage.setItem('quizResult', JSON.stringify({
+    score: score,
+    total: questions.length,
+    percent: percent,
+    erreurs: erreurs
+  }));
 
-  // Affichage des meilleurs scores
-  let bestScoresHtml = scores.map(s =>
-    `<li>${s.date} — <b>${s.theme}</b> : <span style="color:#1de9b6">${s.score} (${s.percent}%)</span></li>`
-  ).join('');
-
-  quizDiv.innerHTML = `
-    <div class="card">
-      <div class="result" style="font-size:1.3em;">
-        Quiz terminé !<br>
-        Score : <b>${score} / ${questions.length}</b> (${percent}%)
-      </div>
-      <div style="margin:16px 0 8px 0;font-size:1.1em;">${message}</div>
-      <button class="menu-btn" onclick="showReview()" style="margin-bottom:12px;">Revoir mes réponses</button>
-      <button class="menu-btn" onclick="restartQuiz()">Recommencer</button>
-      <button class="menu-btn" onclick="goBack()">Retour au menu</button>
-      <div style="margin-top:24px;">
-        <strong style="color:#ff4081;">🏆 Meilleurs scores</strong>
-        <ul style="margin:10px 0 0 0; padding:0; list-style:none; text-align:left;">${bestScoresHtml}</ul>
-      </div>
-      <ul id="review-list" style="display:none;text-align:left;margin-top:18px;">${reviewHtml}</ul>
-    </div>
-  `;
+  // Redirige vers la page finale (nom du fichier : pagefinale.html)
+  window.location.href = "pagefinale.html";
 }
 
 function showReview() {
