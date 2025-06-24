@@ -8,12 +8,13 @@
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
     :root {
       --bg: #181c2f;
-      --card-bg: rgba(24,28,47,0.97);
+      --card-bg: #23263a;
       --text: #fff;
-      --primary: #1de9b6;
-      --secondary: #7c4dff;
-      --accent: #ff4081;
-      --shadow: #7c4dff;
+      --primary: #0072b2;
+      --secondary: #e69f00;
+      --accent: #56b4e9;
+      --shadow: #23263a;
+      --focus: #ffd600;
     }
     html, body {
       margin: 0;
@@ -22,41 +23,54 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Orbitron', Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
-      letter-spacing: .5px;
+      font-size: 1.15em; /* Taille lisible */
+      line-height: 1.7;  /* Interlignage confortable */
+      letter-spacing: 1px;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+    /* Remplace la règle .card, .accueil-card, .menu-card et le responsive par ceci pour harmoniser avec quizz.html */
     .card, .accueil-card, .menu-card {
       background: var(--card-bg);
       color: var(--text);
-      border-radius: 12px;
-      box-shadow: 0 2px 16px var(--shadow);
-      padding: 18px 4vw;
-      max-width: 420px;
-      width: 98vw;
+      border-radius: 18px;
+      box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
+      padding: 28px;
       margin: 18px auto 0 auto;
+      width: 340px;
+      max-width: 98vw;
       border: 2px solid var(--primary);
-      box-sizing: border-box;
+      transition: transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
+      font-size: 1em;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      max-height: calc(100vh - 48px);
     }
     h1 {
-      font-size: 1.4em;
-      margin: 0 0 14px 0;
       color: var(--primary);
+      margin-bottom: 20px;
+      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
+      font-size: 2.2em;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      letter-spacing: 2px;
+      line-height: 1.2;
       text-align: center;
-      text-shadow: 0 0 8px var(--primary), 0 0 20px var(--secondary);
-      word-break: break-word;
     }
     .desc, .scores, .explication {
       font-size: 1em;
       margin-bottom: 18px;
       color: #fff;
       text-align: center;
+      line-height: 1.6;
     }
-    .scores, .scores li { color: #ff4081; }
+    .scores, .scores li { color: var(--accent); }
     .scores ul { list-style: none; padding: 0; margin: 8px 0 0 0; }
     .scores li { color: #fff; font-size: .98em; }
     .menu-btn, .accueil-btn, #restart, #back, #theme-toggle {
@@ -65,18 +79,20 @@
       margin: 10px 0;
       padding: 14px 0;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      color: var(--text);
+      color: #fff;
       font-size: 1.08em;
-      font-weight: 600;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 0 8px var(--secondary), 0 0 2px var(--accent);
-      transition: background .18s, box-shadow .18s, transform .18s;
+      box-shadow: 0 0 10px var(--accent), 0 0 2px var(--secondary);
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
       font-family: 'Orbitron', Arial, sans-serif;
       outline: none;
       text-align: center;
       user-select: none;
+      letter-spacing: 1px;
+      line-height: 1.4;
     }
     .menu-btn:active, .accueil-btn:active, #restart:active, #back:active, #theme-toggle:active {
       transform: scale(.97);
@@ -84,14 +100,14 @@
     }
     #theme-toggle {
       position:fixed;
-      top:10px;right:10px;
+      top:18px;right:18px;
       z-index:1000;
       width:auto;
       min-width:120px;
-      padding:10px 14px;
+      padding:10px 18px;
       font-size:1em;
-      border-radius:6px;
-      box-shadow:0 0 8px var(--secondary),0 0 2px var(--accent);
+      border-radius:8px;
+      box-shadow:0 0 10px var(--secondary),0 0 2px var(--accent);
     }
     .categories-grid {
       display: flex;
@@ -108,41 +124,71 @@
     .categories-grid .menu-btn { width: 100%; min-width: 0; }
     .accueil-unique-btn {
       margin-top: 18px !important;
-      background: linear-gradient(90deg, #ff4081 0%, #ffe082 100%) !important;
+      background: linear-gradient(90deg, var(--accent) 0%, #ffe082 100%) !important;
       color: #181c2f !important;
       font-weight: bold !important;
-      border: 2px solid #ff4081 !important;
-      box-shadow: 0 0 12px #ff4081, 0 0 2px #ffe082 !important;
+      border: 2px solid var(--accent) !important;
+      box-shadow: 0 0 12px var(--accent), 0 0 2px #ffe082 !important;
       letter-spacing: 1.2px;
       font-size: 1.08em !important;
     }
     .accueil-unique-btn:active {
-      background: linear-gradient(90deg, #ffe082 0%, #ff4081 100%) !important;
-      color: #ff4081 !important;
+      background: linear-gradient(90deg, #ffe082 0%, var(--accent) 100%) !important;
+      color: var(--accent) !important;
+    }
+    .key-hint {
+      font-size: 0.95em;
+      color: var(--accent);
+      margin-top: 6px;
+      text-align: right;
+      opacity: 0.85;
+      line-height: 1.3;
     }
     /* Mode clair */
     :root[data-theme='light'] {
       --bg: #f7f7fa;
       --card-bg: #fff;
       --text: #181c2f;
-      --primary: #1de9b6;
-      --secondary: #7c4dff;
-      --accent: #ff4081;
+      --primary: #0072b2;
+      --secondary: #e69f00;
+      --accent: #56b4e9;
       --shadow: #e0e0e0;
     }
     :root[data-theme='light'] .desc,
     :root[data-theme='light'] .scores,
     :root[data-theme='light'] .scores li { color: #181c2f !important; }
-    :root[data-theme='light'] .desc b { color: #1de9b6 !important; }
+    :root[data-theme='light'] .desc b { color: var(--primary) !important; }
     /* Responsive */
     @media (max-width:600px) {
-      html, body { font-size: 15px !important; }
-      .card, .accueil-card, .menu-card { max-width: 99vw; padding: 10vw 2vw; border-radius: 8px; }
-      h1 { font-size: 1.1em !important; margin-bottom: 8px !important; }
-      .desc, .scores { font-size: .98em !important; margin-bottom: 12px !important; }
-      .menu-btn, .accueil-btn, #restart, #back, #theme-toggle { font-size: 1em !important; padding: 12px 0 !important; border-radius: 6px !important; }
-      .categories-grid { flex-direction: column; gap: 0; }
-      .categories-grid > div { width: 100%; gap: 0; }
+      .card, .accueil-card, .menu-card {
+        width: 96vw !important;
+        min-width: unset;
+        max-width: 100vw;
+        box-sizing: border-box;
+        padding: 10px !important;
+        margin: 8px 0 !important;
+        max-height: calc(100vh - 32px);
+        border-radius: 10px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 1.3em !important;
+        margin-bottom: 10px !important;
+        text-align: center;
+        word-break: break-word;
+      }
+      .menu-btn, .accueil-btn, #restart, #back, #theme-toggle {
+        font-size: 1em !important;
+        padding: 10px 0 !important;
+        border-radius: 8px !important;
+      }
+    }
+    button:focus-visible {
+      outline: 3px solid var(--focus, #ffd600);
+      outline-offset: 2px;
     }
   </style>
 </head>
@@ -152,18 +198,21 @@
     <h1>Choisissez une catégorie</h1>
     <div class="categories-grid">
       <div>
-        <button class="menu-btn" onclick="startQuiz('culture')">Culture générale</button>
-        <button class="menu-btn" onclick="startQuiz('islam')">Culture islamique</button>
-        <button class="menu-btn" onclick="startQuiz('histoire')">Histoire</button>
-        <button class="menu-btn" onclick="startQuiz('geo')">Géographie</button>
+        <button class="menu-btn" onclick="startQuiz('culture')" tabindex="0">Culture générale</button>
+        <button class="menu-btn" onclick="startQuiz('islam')" tabindex="0">Culture islamique</button>
+        <button class="menu-btn" onclick="startQuiz('histoire')" tabindex="0">Histoire</button>
+        <button class="menu-btn" onclick="startQuiz('geo')" tabindex="0">Géographie</button>
       </div>
       <div>
-        <button class="menu-btn" onclick="startQuiz('sport')">Sport</button>
-        <button class="menu-btn" onclick="startQuiz('math')">Math</button>
-        <button class="menu-btn" onclick="startQuiz('autres')">Autres</button>
-        <button class="menu-btn accueil-unique-btn" onclick="window.location.href='accueil.html'">🏠 Retour à l'accueil</button>
+        <button class="menu-btn" onclick="startQuiz('sport')" tabindex="0">Sport</button>
+        <button class="menu-btn" onclick="startQuiz('math')" tabindex="0">Math</button>
+        <button class="menu-btn" onclick="startQuiz('autres')" tabindex="0">Autres</button>
       </div>
+    </div> <!-- fin de .categories-grid -->
+    <div class="key-hint" style="font-size:0.95em;color:var(--accent);margin-top:6px;text-align:right;opacity:0.85;">
+      <span>Astuce : utilisez <b>Tab</b> pour naviguer, <b>Entrée</b> ou <b>Espace</b> pour valider</span>
     </div>
+    <button class="menu-btn accueil-unique-btn" onclick="window.location.href='accueil.html'" tabindex="0">🏠 Retour à l'accueil</button>
   </div>
   <script>
     // Thème clair/sombre ultra-rapide

@@ -6,12 +6,15 @@
   <style>
     :root {
       --bg: #181c2f;
-      --card-bg: rgba(24,28,47,0.97);
+      --card-bg: #23263a;
       --text: #fff;
-      --primary: #1de9b6;
-      --secondary: #7c4dff;
-      --accent: #ff4081;
-      --shadow: #7c4dff;
+      --primary: #009688;      /* Teal, accessible */
+      --secondary: #3f51b5;    /* Indigo, accessible */
+      --accent: #ffb300;       /* Orange, accessible */
+      --error: #e53935;        /* Red, accessible */
+      --shadow: #23263a;
+      --success: #43a047;      /* Green, accessible */
+      --focus: #ffd600;        /* Yellow for focus outline */
     }
     body {
       background: var(--bg);
@@ -28,24 +31,40 @@
     }
     .card {
       background: var(--card-bg);
+      color: var(--text);
       border-radius: 18px;
       box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
       padding: 28px;
-      margin: 18px;
+      margin: 18px auto 0 auto;
       width: 340px;
+      max-width: 98vw;
       border: 2px solid var(--primary);
-      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      font-size: 1em;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      max-height: calc(100vh - 48px);
     }
     h1 {
       color: var(--primary);
+      margin-bottom: 20px;
       text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
-      font-size: 2em;
-      margin-bottom: 18px;
+      font-size: 2.2em;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-align: center;
     }
     .score {
       font-size: 1.3em;
       margin-bottom: 18px;
       color: var(--accent);
+      text-shadow: 0 0 2px #000;
     }
     ul {
       text-align: left;
@@ -54,54 +73,123 @@
     }
     li {
       margin-bottom: 10px;
+      line-height: 1.5;
     }
     .btn {
-      padding: 12px 28px;
-      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
-      color: #fff;
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 14px 0;
       border: none;
       border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.1em;
-      font-family: 'Orbitron', Arial, sans-serif;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      font-size: 1.08em;
       font-weight: bold;
-      box-shadow: 0 0 16px #ff4081, 0 0 8px #7c4dff;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent), 0 0 2px var(--secondary);
       transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-      margin-top: 18px;
+      font-family: 'Orbitron', Arial, sans-serif;
+      outline: none;
+      text-align: center;
+      user-select: none;
+      letter-spacing: 1px;
+      line-height: 1.4;
     }
-    .btn:hover {
-      background: linear-gradient(90deg, #1de9b6 0%, #ff4081 100%);
-      box-shadow: 0 0 32px #1de9b6, 0 0 16px #ff4081;
-      transform: scale(1.05);
+    .btn:active, .btn:focus {
+      transform: scale(.97);
+      background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
     }
     #theme-toggle {
       position: fixed;
       top: 18px;
       right: 18px;
       z-index: 1000;
-      padding: 10px 18px;
-      border-radius: 8px;
+      min-width: 140px;
+      padding: 12px 22px;
+      border-radius: 24px;
       border: none;
       cursor: pointer;
       font-family: 'Orbitron', Arial, sans-serif;
-      font-weight: 600;
-      background: linear-gradient(90deg,#1de9b6 0%,#7c4dff 100%);
+      font-weight: 700;
+      font-size: 1.08em;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
       color: #fff;
-      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
-      transition: background 0.2s;
+      box-shadow: 0 0 16px var(--secondary), 0 0 4px var(--accent);
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s, color 0.2s;
+      outline: none;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    #theme-toggle:hover {
-      background: linear-gradient(90deg,#ff4081 0%,#1de9b6 100%);
+    #theme-toggle:hover, #theme-toggle:focus-visible {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+      color: var(--secondary);
+      box-shadow: 0 0 32px var(--accent), 0 0 8px var(--primary);
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+    #theme-toggle .icon {
+      font-size: 1.2em;
+      vertical-align: middle;
+    }
+    .key-hint {
+      font-size: 0.95em;
+      color: var(--accent);
+      margin-top: 8px;
+      text-align: right;
+      opacity: 0.85;
+      line-height: 1.3;
+    }
+    @media (max-width:600px) {
+      .card {
+        width: 96vw !important;
+        min-width: unset;
+        max-width: 100vw;
+        box-sizing: border-box;
+        padding: 10px !important;
+        margin: 8px 0 !important;
+        max-height: calc(100vh - 32px);
+        border-radius: 10px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 1.3em !important;
+        margin-bottom: 10px !important;
+        text-align: center;
+        word-break: break-word;
+      }
+      .btn {
+        font-size: 1em !important;
+        padding: 10px 0 !important;
+        border-radius: 8px !important;
+      }
+    }
+    button:focus-visible {
+      outline: 3px solid var(--focus, #ffd600);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
-  <button id="theme-toggle">Mode clair/sombre</button>
+  <button id="theme-toggle" tabindex="0">
+    <span class="icon" aria-hidden="true">🌙</span>
+    <span>Mode clair/sombre</span>
+  </button>
   <div class="card">
     <h1>Résultat du Quiz</h1>
     <div id="result"></div>
     <div id="erreurs"></div>
-    <button class="btn" onclick="window.location.href='index.html'">Retour à l'accueil</button>
+    <div class="key-hint" style="font-size:0.95em;color:var(--accent);margin-top:8px;text-align:right;opacity:0.85;">
+      <span>Astuce : utilisez <b>Tab</b> pour naviguer, <b>Entrée</b> ou <b>Espace</b> pour valider</span>
+    </div>
+    <button class="btn" onclick="window.location.href='index.html'" tabindex="0">Retour à l'accueil</button>
   </div>
   <script>
     // Gestion du thème clair/sombre
@@ -109,19 +197,25 @@
       '--bg': '#f7f7fa',
       '--card-bg': '#fff',
       '--text': '#181c2f',
-      '--primary': '#1de9b6',
-      '--secondary': '#7c4dff',
-      '--accent': '#ff4081',
-      '--shadow': '#e0e0e0'
+      '--primary': '#009688',
+      '--secondary': '#3f51b5',
+      '--accent': '#ffb300',
+      '--error': '#e53935',
+      '--shadow': '#e0e0e0',
+      '--success': '#43a047',
+      '--focus': '#ffd600'
     };
     const darkTheme = {
       '--bg': '#181c2f',
-      '--card-bg': 'rgba(24,28,47,0.97)',
+      '--card-bg': '#23263a',
       '--text': '#fff',
-      '--primary': '#1de9b6',
-      '--secondary': '#7c4dff',
-      '--accent': '#ff4081',
-      '--shadow': '#7c4dff'
+      '--primary': '#009688',
+      '--secondary': '#3f51b5',
+      '--accent': '#ffb300',
+      '--error': '#e53935',
+      '--shadow': '#23263a',
+      '--success': '#43a047',
+      '--focus': '#ffd600'
     };
     function applyTheme(theme) {
       for (const key in theme) {
@@ -135,23 +229,35 @@
       if (isDark()) applyTheme(darkTheme);
       else applyTheme(lightTheme);
     }
-    document.getElementById('theme-toggle').onclick = function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    function updateThemeIcon() {
+      themeToggle.querySelector('.icon').textContent = isDark() ? "🌙" : "☀️";
+    }
+    themeToggle.onclick = function() {
       const dark = isDark();
       localStorage.setItem('theme', dark ? 'light' : 'dark');
       initTheme();
+      updateThemeIcon();
     };
-    initTheme();
+    updateThemeIcon();
 
     // Récupère les données du quiz depuis le localStorage
     const data = JSON.parse(localStorage.getItem('quizResult'));
     if (data) {
       document.getElementById('result').innerHTML = `<div class="score">Score : <b>${data.score} / ${data.total}</b> (${data.percent}%)</div>`;
       if (data.erreurs && data.erreurs.length) {
-        document.getElementById('erreurs').innerHTML = "<h2>Erreurs :</h2><ul>" +
-          data.erreurs.map(e => `<li><b>${e.question}</b><br>Ta réponse : <span style="color:#ff4081">${e.user || "aucune"}</span><br>Bonne réponse : <span style="color:#1de9b6">${e.correct}</span></li>`).join('') +
+        document.getElementById('erreurs').innerHTML =
+          `<div class="erreur-label">Erreurs :</div><ul>` +
+          data.erreurs.map(e =>
+            `<li>
+              <b>${e.question}</b><br>
+              <span>Ta réponse : <span class="erreur-user">${e.user || "aucune"}</span></span><br>
+              <span>Bonne réponse : <span class="erreur-correct">${e.correct}</span></span>
+            </li>`
+          ).join('') +
           "</ul>";
       } else {
-        document.getElementById('erreurs').innerHTML = "<h2>Aucune erreur !</h2>";
+        document.getElementById('erreurs').innerHTML = `<div class="erreur-label" style="color:var(--success);">Aucune erreur ! 🎉</div>`;
       }
     } else {
       document.getElementById('result').innerHTML = "Aucun résultat à afficher.";

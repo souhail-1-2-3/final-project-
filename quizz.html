@@ -6,12 +6,15 @@
   <style>
     :root {
       --bg: #181c2f;
-      --card-bg: rgba(24,28,47,0.97);
+      --card-bg: #23263a;
       --text: #fff;
-      --primary: #1de9b6;
-      --secondary: #7c4dff;
-      --accent: #ff4081;
-      --shadow: #7c4dff;
+      --primary: #0072b2;
+      --secondary: #e69f00;
+      --accent: #56b4e9;
+      --shadow: #23263a;
+      --success: #009e73;
+      --error: #d55e00;
+      --focus: #ffd600;
     }
     body {
       font-family: 'Orbitron', 'Arial', sans-serif;
@@ -24,15 +27,20 @@
       align-items: center;
       min-height: 100vh;
       letter-spacing: 1px;
+      font-size: 1.15em; /* Taille lisible */
+      line-height: 1.7;  /* Interlignage confortable */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     h1 {
       color: var(--primary);
       margin-bottom: 20px;
       text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
-      font-size: 2.5em;
+      font-size: 2.2em;
       font-family: 'Orbitron', 'Arial', sans-serif;
       letter-spacing: 2px;
+      line-height: 1.2;
     }
 
     .card {
@@ -47,6 +55,8 @@
       transition: transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
+      font-size: 1em;
+      line-height: 1.6;
     }
 
     .card::before {
@@ -54,7 +64,7 @@
       position: absolute;
       inset: 0;
       border-radius: 18px;
-      background: linear-gradient(120deg, #1de9b6 0%, #ff4081 100%);
+      background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
       opacity: 0.10;
       z-index: 0;
       pointer-events: none;
@@ -62,42 +72,48 @@
 
     .card:hover {
       transform: scale(1.03) rotate(-1deg);
-      box-shadow: 0 0 40px #1de9b6, 0 0 8px #ff4081;
+      box-shadow: 0 0 40px var(--primary), 0 0 8px var(--accent);
     }
 
     .question {
       font-weight: bold;
       margin-bottom: 18px;
-      color: #fff;
-      font-size: 1.15em;
-      text-shadow: 0 0 6px #1de9b6;
+      color: var(--text);
+      font-size: 1.1em;
+      text-shadow: 0 0 6px var(--primary);
       position: relative;
       z-index: 1;
+      line-height: 1.5;
     }
 
     .answers button {
       display: block;
       width: 100%;
       margin: 10px 0;
-      padding: 12px;
+      padding: 14px;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(90deg, #1de9b6 0%, #ff4081 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
       color: #fff;
       font-weight: bold;
       font-size: 1em;
       cursor: pointer;
-      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
+      box-shadow: 0 0 10px var(--accent), 0 0 2px var(--secondary);
       transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       outline: none;
       position: relative;
       z-index: 1;
+      letter-spacing: 1px;
+      line-height: 1.4;
     }
 
-    .answers button:hover:not(:disabled) {
-      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
+    .answers button:hover:not(:disabled),
+    .answers button:focus-visible {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
       transform: scale(1.04);
-      box-shadow: 0 0 20px #ff4081, 0 0 8px #1de9b6;
+      box-shadow: 0 0 20px var(--accent), 0 0 8px var(--primary);
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
     }
 
     .answers button:disabled {
@@ -110,78 +126,51 @@
       margin-top: 12px;
       font-weight: bold;
       font-size: 1.1em;
-      text-shadow: 0 0 8px #fff, 0 0 16px #1de9b6;
+      text-shadow: 0 0 8px #fff, 0 0 16px var(--primary);
       min-height: 1.5em;
       position: relative;
       z-index: 1;
+      line-height: 1.4;
     }
 
     #scoreboard {
       margin: 22px 0;
       font-size: 1.3em;
-      color: #ff4081;
-      text-shadow: 0 0 10px #1de9b6, 0 0 20px #7c4dff;
+      color: var(--secondary);
+      text-shadow: 0 0 10px var(--primary), 0 0 20px var(--accent);
       font-family: 'Orbitron', 'Arial', sans-serif;
       letter-spacing: 2px;
+      line-height: 1.3;
     }
 
-    #restart {
-      padding: 12px 28px;
-      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 28px;
-      font-size: 1.1em;
-      font-family: 'Orbitron', 'Arial', sans-serif;
-      font-weight: bold;
-      box-shadow: 0 0 16px #ff4081, 0 0 8px #7c4dff;
-      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-    }
-
-    #restart:hover {
-      background: linear-gradient(90deg, #1de9b6 0%, #ff4081 100%);
-      box-shadow: 0 0 32px #1de9b6, 0 0 16px #ff4081;
-      transform: scale(1.05);
-    }
-
-    /* Import Orbitron font for a futuristic look */
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
-
-    .menu-btn {
-      padding: 12px 24px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(90deg, #1de9b6 0%, #7c4dff 100%);
-      color: #fff;
-      font-weight: bold;
-      font-size: 1em;
-      cursor: pointer;
-      box-shadow: 0 0 10px #7c4dff, 0 0 2px #ff4081;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      outline: none;
-      display: inline-block;
-    }
-
-    .menu-btn:hover {
-      background: linear-gradient(90deg, #ff4081 0%, #1de9b6 100%);
-      transform: scale(1.04);
-      box-shadow: 0 0 20px #ff4081, 0 0 8px #1de9b6;
+    .key-hint {
+      font-size: 0.95em;
+      color: var(--accent);
+      margin-top: 2px;
+      text-align: right;
+      opacity: 0.85;
+      line-height: 1.3;
     }
 
     @media (max-width: 600px) {
       body {
         padding: 8px;
+        font-size: 1em;
       }
       .card, #timer-bar {
-        width: 98vw !important;
+        width: 96vw !important;
         min-width: unset;
         max-width: 100vw;
         box-sizing: border-box;
-        padding: 12px !important;
+        padding: 10px !important;
         margin: 8px 0 !important;
+        max-height: calc(100vh - 32px);
+        border-radius: 10px;
+        overflow: auto;
+        /* Empêche le débordement vertical */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
       h1 {
         font-size: 1.3em !important;
@@ -209,12 +198,91 @@
         font-size: 1em !important;
       }
     }
+
+    @keyframes flash-green {
+      0% { box-shadow: 0 0 0 0 #43a04788; }
+      50% { box-shadow: 0 0 32px 12px #43a04788; }
+      100% { box-shadow: 0 0 0 0 #43a04788; }
+    }
+    @keyframes flash-red {
+      0% { box-shadow: 0 0 0 0 #e5393588; }
+      50% { box-shadow: 0 0 32px 12px #e5393588; }
+      100% { box-shadow: 0 0 0 0 #e5393588; }
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+    #restart {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  margin: 18px auto 0 auto;
+  padding: 14px 0;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--success) 0%, var(--primary) 100%);
+  color: #fff;
+  font-size: 1.08em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--success), 0 0 2px var(--primary);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: 'Orbitron', Arial, sans-serif;
+  outline: none;
+  text-align: center;
+  user-select: none;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+#restart:active, #restart:focus-visible {
+  transform: scale(.97);
+  background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+  #theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1000;
+  min-width: 140px;
+  padding: 12px 22px;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.08em;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #fff;
+  box-shadow: 0 0 16px var(--secondary), 0 0 4px var(--accent);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s, color 0.2s;
+  outline: none;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#theme-toggle:hover, #theme-toggle:focus-visible {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+  color: var(--secondary);
+  box-shadow: 0 0 32px var(--accent), 0 0 8px var(--primary);
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+#theme-toggle .icon {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
   </style>
 </head>
 <body>
 
-  <button id="theme-toggle" style="position:fixed;top:18px;right:18px;z-index:1000;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:'Orbitron',Arial,sans-serif;font-weight:600;background:linear-gradient(90deg,#1de9b6 0%,#7c4dff 100%);color:#fff;box-shadow:0 0 10px #7c4dff,0 0 2px #ff4081;transition:background 0.2s;">
-    Mode clair/sombre
+  <button id="theme-toggle" tabindex="0">
+    <span class="icon" aria-hidden="true">🌙</span>
+    <span>Mode clair/sombre</span>
   </button>
 
   <h1>🧠 Quiz Culture Générale</h1>
@@ -280,12 +348,18 @@
       else applyTheme(lightTheme);
     }
     // Toggle
-    document.getElementById('theme-toggle').onclick = function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.onclick = function() {
       const dark = isDark();
       localStorage.setItem('theme', dark ? 'light' : 'dark');
       initTheme();
+      updateThemeIcon();
     };
+    function updateThemeIcon() {
+      themeToggle.querySelector('.icon').textContent = isDark() ? "🌙" : "☀️";
+    }
     initTheme();
+    updateThemeIcon();
   </script>
 
   <script>
@@ -487,11 +561,18 @@ function showQuestion() {
     return;
   }
   const q = questions[current];
+  const questionPosition = `<div style="text-align:right;color:var(--accent);font-size:1em;margin-bottom:6px;">
+  Question ${current + 1} / ${questions.length}
+</div>`;
   quizDiv.innerHTML = `
     <div class="card">
+      ${questionPosition}
       <div class="question">${q.question}</div>
       <div class="answers">
-        ${q.answers.map(ans => `<button>${ans}</button>`).join('')}
+        ${q.answers.map(ans => `<button tabindex="0">${ans}</button>`).join('')}
+      </div>
+      <div class="key-hint" style="font-size:0.92em;color:var(--accent);margin-top:2px;text-align:right;opacity:0.85;">
+        <span style="font-size:0.95em;">Astuce : utilisez <b>Tab</b> pour naviguer, <b>Entrée</b> ou <b>Espace</b> pour valider</span>
       </div>
       <div class="result"></div>
       <div class="explication" style="margin-top:8px;color:#1de9b6;font-size:0.98em;"></div>
@@ -516,34 +597,76 @@ function showQuestion() {
     }, 1000);
   }
   document.querySelectorAll('.answers button').forEach(btn => {
+    // Activation par clic souris
     btn.addEventListener('click', () => {
       clearInterval(timerInterval);
       const result = quizDiv.querySelector('.result');
       const explication = quizDiv.querySelector('.explication');
       let isCorrect = btn.textContent === q.correct;
+
+      // Animation de feedback
+      const card = quizDiv.querySelector('.card');
+      card.style.animation = isCorrect
+        ? "flash-green 0.6s"
+        : "flash-red 0.6s";
+
+      // Coloriage des boutons
+      document.querySelectorAll('.answers button').forEach(b => {
+        if (b.textContent === q.correct) {
+          b.style.background = "linear-gradient(90deg, #43a047 0%, #56b4e9 100%)";
+          b.style.color = "#fff";
+        } else if (b === btn && !isCorrect) {
+          b.style.background = "linear-gradient(90deg, #d55e00 0%, #e53935 100%)";
+          b.style.color = "#fff";
+        } else {
+          b.style.opacity = "0.7";
+        }
+      });
+
       if (isCorrect) {
         result.textContent = "✅ Bonne réponse !";
-        result.style.color = "green";
+        result.style.color = "#43a047";
         score++;
       } else {
         result.textContent = "❌ Mauvaise réponse.";
-        result.style.color = "red";
+        result.style.color = "#e53935";
         explication.innerHTML = `Bonne réponse : <b>${q.correct}</b>${q.explication ? "<br>" + q.explication : ""}`;
       }
       userAnswers.push({question: q.question, user: btn.textContent, correct: q.correct});
       scoreboard.textContent = `Score : ${score} / ${questions.length}`;
       document.querySelectorAll('.answers button').forEach(b => b.disabled = true);
-      setTimeout(() => { current++; showQuestion(); }, 2000);
+      setTimeout(() => {
+        card.style.animation = "";
+        document.querySelectorAll('.answers button').forEach(b => {
+          b.style.background = "";
+          b.style.color = "";
+          b.style.opacity = "";
+        });
+        current++;
+        showQuestion();
+      }, 2000);
+    });
+
+    // Activation par clavier (Enter ou Espace)
+    btn.addEventListener('keydown', function(e) {
+      if ((e.key === "Enter" || e.key === " ") && !btn.disabled) {
+        e.preventDefault();
+        btn.click();
+      }
     });
   });
 }
 
 function restartQuiz() {
-  window.location.href = "index.html";
+  if (confirm("Êtes-vous sûr de vouloir recommencer le quiz ? Votre progression sera perdue.")) {
+    window.location.reload();
+  }
 }
 
 function goBack() {
-  window.location.href = "index.html";
+  if (confirm("Êtes-vous sûr de vouloir revenir au menu ? Votre progression sera perdue.")) {
+    window.location.href = "index.html";
+  }
 }
 
 function showFinalScore() {
