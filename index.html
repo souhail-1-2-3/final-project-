@@ -5,7 +5,7 @@
   <title>Quiz</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    /* Remplace tout le CSS de <style> dans index.html par celui-ci, identique à quizz.html */
     :root {
       --bg: #181c2f;
       --card-bg: #23263a;
@@ -14,27 +14,41 @@
       --secondary: #e69f00;
       --accent: #56b4e9;
       --shadow: #23263a;
+      --success: #009e73;
+      --error: #d55e00;
       --focus: #ffd600;
     }
-    html, body {
+    body {
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      background: var(--bg) !important;
+      color: var(--text) !important;
       margin: 0;
-      padding: 0;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 1px;
       font-size: 1.15em; /* Taille lisible */
       line-height: 1.7;  /* Interlignage confortable */
-      letter-spacing: 1px;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    /* Remplace la règle .card, .accueil-card, .menu-card et le responsive par ceci pour harmoniser avec quizz.html */
+
+    h1 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
+      font-size: 2.2em;
+      font-family: 'Orbitron', 'Arial', sans-serif;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-align: center;
+    }
+
     .card, .accueil-card, .menu-card {
-      background: var(--card-bg);
-      color: var(--text);
+      background: var(--card-bg) !important;
+      color: var(--text) !important;
       border-radius: 18px;
       box-shadow: 0 0 24px var(--shadow), 0 0 4px #fff3;
       padding: 28px;
@@ -53,26 +67,23 @@
       min-height: 0;
       max-height: calc(100vh - 48px);
     }
-    h1 {
-      color: var(--primary);
-      margin-bottom: 20px;
-      text-shadow: 0 0 12px var(--primary), 0 0 40px var(--secondary);
-      font-size: 2.2em;
-      font-family: 'Orbitron', 'Arial', sans-serif;
-      letter-spacing: 2px;
-      line-height: 1.2;
-      text-align: center;
+
+    .card::before, .menu-card::before, .accueil-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
+      opacity: 0.10;
+      z-index: 0;
+      pointer-events: none;
     }
-    .desc, .scores, .explication {
-      font-size: 1em;
-      margin-bottom: 18px;
-      color: #fff;
-      text-align: center;
-      line-height: 1.6;
+
+    .card:hover, .menu-card:hover, .accueil-card:hover {
+      transform: scale(1.03) rotate(-1deg);
+      box-shadow: 0 0 40px var(--primary), 0 0 8px var(--accent);
     }
-    .scores, .scores li { color: var(--accent); }
-    .scores ul { list-style: none; padding: 0; margin: 8px 0 0 0; }
-    .scores li { color: #fff; font-size: .98em; }
+
     .menu-btn, .accueil-btn, #restart, #back, #theme-toggle {
       display: block;
       width: 100%;
@@ -99,16 +110,41 @@
       background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
     }
     #theme-toggle {
-      position:fixed;
-      top:18px;right:18px;
-      z-index:1000;
-      width:auto;
-      min-width:120px;
-      padding:10px 18px;
-      font-size:1em;
-      border-radius:8px;
-      box-shadow:0 0 10px var(--secondary),0 0 2px var(--accent);
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      left: auto;
+      z-index: 1000;
+      min-width: 140px;
+      padding: 12px 22px;
+      border-radius: 24px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.08em;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      box-shadow: 0 0 16px var(--secondary), 0 0 4px var(--accent);
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s, color 0.2s;
+      outline: none;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    #theme-toggle:hover, #theme-toggle:focus-visible {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+      color: var(--secondary);
+      box-shadow: 0 0 32px var(--accent), 0 0 8px var(--primary);
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+    #theme-toggle .icon {
+      font-size: 1.2em;
+      vertical-align: middle;
+    }
+
     .categories-grid {
       display: flex;
       gap: 12px;
@@ -122,6 +158,7 @@
       width: 150px;
     }
     .categories-grid .menu-btn { width: 100%; min-width: 0; }
+
     .accueil-unique-btn {
       margin-top: 18px !important;
       background: linear-gradient(90deg, var(--accent) 0%, #ffe082 100%) !important;
@@ -136,6 +173,7 @@
       background: linear-gradient(90deg, #ffe082 0%, var(--accent) 100%) !important;
       color: var(--accent) !important;
     }
+
     .key-hint {
       font-size: 0.95em;
       color: var(--accent);
@@ -144,6 +182,7 @@
       opacity: 0.85;
       line-height: 1.3;
     }
+
     /* Mode clair */
     :root[data-theme='light'] {
       --bg: #f7f7fa;
@@ -158,8 +197,13 @@
     :root[data-theme='light'] .scores,
     :root[data-theme='light'] .scores li { color: #181c2f !important; }
     :root[data-theme='light'] .desc b { color: var(--primary) !important; }
+
     /* Responsive */
-    @media (max-width:600px) {
+    @media (max-width: 600px) {
+      body {
+        padding: 8px;
+        font-size: 1em;
+      }
       .card, .accueil-card, .menu-card {
         width: 96vw !important;
         min-width: unset;
@@ -186,14 +230,26 @@
         border-radius: 8px !important;
       }
     }
+
     button:focus-visible {
-      outline: 3px solid var(--focus, #ffd600);
+      outline: 3px solid var(--focus);
       outline-offset: 2px;
+    }
+
+    /* Tu peux aussi supprimer ou commenter la règle CSS suivante si tu veux nettoyer le style */
+    #theme-toggle,
+    #theme-toggle:hover,
+    #theme-toggle:focus-visible,
+    #theme-toggle .icon {
+      display: none !important;
     }
   </style>
 </head>
 <body>
-  <button id="theme-toggle">Clair / Sombre</button>
+  <button id="theme-toggle" tabindex="0">
+    <span class="icon" aria-hidden="true">🌙</span>
+    <span>Mode clair/sombre</span>
+  </button>
   <div class="menu-card">
     <h1>Choisissez une catégorie</h1>
     <div class="categories-grid">
@@ -206,13 +262,18 @@
       <div>
         <button class="menu-btn" onclick="startQuiz('sport')" tabindex="0">Sport</button>
         <button class="menu-btn" onclick="startQuiz('math')" tabindex="0">Math</button>
+        <button class="menu-btn" onclick="startQuiz('capitale')" tabindex="0">Capitale</button>
         <button class="menu-btn" onclick="startQuiz('autres')" tabindex="0">Autres</button>
       </div>
     </div> <!-- fin de .categories-grid -->
     <div class="key-hint" style="font-size:0.95em;color:var(--accent);margin-top:6px;text-align:right;opacity:0.85;">
       <span>Astuce : utilisez <b>Tab</b> pour naviguer, <b>Entrée</b> ou <b>Espace</b> pour valider</span>
     </div>
-    <button class="menu-btn accueil-unique-btn" onclick="window.location.href='accueil.html'" tabindex="0">🏠 Retour à l'accueil</button>
+  </div>
+  <!-- Exemple dans la carte -->
+  <div class="card">
+    <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f393.svg" alt="Culture" class="illu" style="width:64px;display:block;margin:0 auto 12px auto;">
+    <!-- ...le reste du contenu... -->
   </div>
   <script>
     // Thème clair/sombre ultra-rapide
@@ -227,16 +288,27 @@
     }
     function isDark() { return (localStorage.getItem('theme') || 'dark') === 'dark'; }
     function initTheme() { isDark() ? applyTheme(darkTheme, 'dark') : applyTheme(lightTheme, 'light'); }
-    document.getElementById('theme-toggle').onclick = function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    function updateThemeIcon() {
+      themeToggle.querySelector('.icon').textContent = isDark() ? "🌙" : "☀️";
+    }
+    themeToggle.onclick = function() {
       const dark = isDark();
       localStorage.setItem('theme', dark ? 'light' : 'dark');
       initTheme();
+      updateThemeIcon();
     };
     initTheme();
+    updateThemeIcon();
     // Exemple de fonction pour lancer un quiz (à adapter selon ton JS)
     function startQuiz(cat) {
+      document.body.setAttribute('data-theme-cat', cat || 'culture');
       window.location.href = `quizz.html?cat=${cat}`;
     }
+    // Quand tu crées la carte :
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.setAttribute('data-cat', cat || 'culture');
   </script>
 </body>
 </html>

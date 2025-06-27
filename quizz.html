@@ -367,28 +367,28 @@
 
 const questionsByCategory = {
   culture: [
-    { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique" },
-    { question: "Qui a peint la Joconde ?", answers: ["Van Gogh", "Léonard de Vinci", "Picasso"], correct: "Léonard de Vinci" },
-    { question: "Combien y a-t-il de continents ?", answers: ["5", "6", "7"], correct: "7" },
-    { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazone", "Yangtsé"], correct: "Amazone" },
-    { question: "Dans quel pays se trouve la Tour Eiffel ?", answers: ["Italie", "France", "Espagne"], correct: "France" },
-    { question: "Quel est le symbole chimique de l’eau ?", answers: ["O2", "H2O", "CO2"], correct: "H2O" },
-    { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Saint-Exupéry", "Molière"], correct: "Saint-Exupéry" },
-    { question: "Quel est l’animal le plus rapide du monde ?", answers: ["Guépard", "Aigle", "Lion"], correct: "Guépard" },
-    { question: "Combien de couleurs dans l’arc-en-ciel ?", answers: ["5", "7", "9"], correct: "7" },
-    { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Kalahari"], correct: "Sahara" }
+    { question: "Quel est le plus grand océan du monde ?", answers: ["Atlantique", "Indien", "Pacifique"], correct: "Pacifique", difficulty: 1 },
+    { question: "Qui a peint la Joconde ?", answers: ["Van Gogh", "Léonard de Vinci", "Picasso"], correct: "Léonard de Vinci", difficulty: 1 },
+    { question: "Combien y a-t-il de continents ?", answers: ["5", "6", "7"], correct: "7", difficulty: 1 },
+    { question: "Quel est le plus long fleuve du monde ?", answers: ["Nil", "Amazone", "Yangtsé"], correct: "Amazone", difficulty: 2 },
+    { question: "Dans quel pays se trouve la Tour Eiffel ?", answers: ["Italie", "France", "Espagne"], correct: "France", difficulty: 1 },
+    { question: "Quel est le symbole chimique de l’eau ?", answers: ["O2", "H2O", "CO2"], correct: "H2O", difficulty: 2 },
+    { question: "Qui a écrit 'Le Petit Prince' ?", answers: ["Victor Hugo", "Saint-Exupéry", "Molière"], correct: "Saint-Exupéry", difficulty: 2 },
+    { question: "Quel est l’animal le plus rapide du monde ?", answers: ["Guépard", "Aigle", "Lion"], correct: "Guépard", difficulty: 2 },
+    { question: "Combien de couleurs dans l’arc-en-ciel ?", answers: ["5", "7", "9"], correct: "7", difficulty: 1 },
+    { question: "Quel est le plus grand désert du monde ?", answers: ["Sahara", "Gobi", "Kalahari"], correct: "Sahara", difficulty: 2 }
   ],
   islam: [
-    { question: "Combien de piliers de l’Islam ?", answers: ["3", "5", "7"], correct: "5" },
-    { question: "Quel est le livre sacré de l’Islam ?", answers: ["Bible", "Torah", "Coran"], correct: "Coran" },
-    { question: "Dans quelle ville est né le Prophète Muhammad ?", answers: ["Médine", "La Mecque", "Jérusalem"], correct: "La Mecque" },
-    { question: "Quel mois est dédié au jeûne ?", answers: ["Chawwal", "Ramadan", "Dhou al-Hijja"], correct: "Ramadan" },
-    { question: "Combien de prières quotidiennes ?", answers: ["3", "5", "7"], correct: "5" },
-    { question: "Quel est le premier calife ?", answers: ["Ali", "Omar", "Abou Bakr"], correct: "Abou Bakr" },
-    { question: "Quel animal a transporté le Prophète lors de l’Isra et Miraj ?", answers: ["Chameau", "Bouraq", "Cheval"], correct: "Bouraq" },
-    { question: "Quel est le nom du dernier Prophète ?", answers: ["Moussa", "Issa", "Muhammad"], correct: "Muhammad" },
-    { question: "Où se trouve la Kaaba ?", answers: ["Médine", "La Mecque", "Bagdad"], correct: "La Mecque" },
-    { question: "Quel est le jour sacré de la semaine ?", answers: ["Samedi", "Dimanche", "Vendredi"], correct: "Vendredi" }
+    { question: "Combien de piliers de l’Islam ?", answers: ["3", "5", "7"], correct: "5", difficulty: 1 },
+    { question: "Quel est le livre sacré de l’Islam ?", answers: ["Bible", "Torah", "Coran"], correct: "Coran", difficulty: 1 },
+    { question: "Dans quelle ville est né le Prophète Muhammad ?", answers: ["Médine", "La Mecque", "Jérusalem"], correct: "La Mecque", difficulty: 1 },
+    { question: "Quel mois est dédié au jeûne ?", answers: ["Chawwal", "Ramadan", "Dhou al-Hijja"], correct: "Ramadan", difficulty: 1 },
+    { question: "Combien de prières quotidiennes ?", answers: ["3", "5", "7"], correct: "5", difficulty: 2 },
+    { question: "Quel est le premier calife ?", answers: ["Ali", "Omar", "Abou Bakr"], correct: "Abou Bakr", difficulty: 2 },
+    { question: "Quel animal a transporté le Prophète lors de l’Isra et Miraj ?", answers: ["Chameau", "Bouraq", "Cheval"], correct: "Bouraq", difficulty: 2 },
+    { question: "Quel est le nom du dernier Prophète ?", answers: ["Moussa", "Issa", "Muhammad"], correct: "Muhammad", difficulty: 1 },
+    { question: "Où se trouve la Kaaba ?", answers: ["Médine", "La Mecque", "Bagdad"], correct: "La Mecque", difficulty: 2 },
+    { question: "Quel est le jour sacré de la semaine ?", answers: ["Samedi", "Dimanche", "Vendredi"], correct: "Vendredi", difficulty: 1 }
   ],
   histoire: [
     { question: "Qui était Napoléon Bonaparte ?", answers: ["Un roi", "Un empereur", "Un peintre"], correct: "Un empereur" },
@@ -437,48 +437,70 @@ const questionsByCategory = {
     { question: "Combien de tours dans une course de 400m ?", answers: ["1", "2", "4"], correct: "1" }
   ],
   math: [
-    { question: "Combien font 7 + 5 ?", answers: ["11", "12", "13"], correct: "12" },
-    { question: "Quel est le résultat de 6 × 8 ?", answers: ["42", "48", "54"], correct: "48" },
-    { question: "Combien font 36 ÷ 6 ?", answers: ["5", "6", "7"], correct: "6" },
-    { question: "Qui est considéré comme le père de la géométrie ?", answers: ["Euclide", "Pythagore", "Archimède"], correct: "Euclide" },
-    { question: "Quel est le carré de 9 ?", answers: ["18", "81", "27"], correct: "81" },
-    { question: "Quel mathématicien grec a donné son nom à un célèbre théorème sur les triangles rectangles ?", answers: ["Pythagore", "Thalès", "Eratosthène"], correct: "Pythagore" },
-    { question: "Combien font 15 – 7 ?", answers: ["8", "7", "9"], correct: "8" },
-    { question: "Quel est le résultat de 5 × 7 ?", answers: ["35", "25", "30"], correct: "35" },
-    { question: "Quel mathématicien a inventé le symbole ∞ pour l’infini ?", answers: ["Newton", "Leibniz", "John Wallis"], correct: "John Wallis" },
-    { question: "Combien font 100 ÷ 4 ?", answers: ["20", "25", "30"], correct: "25" },
-    { question: "Combien font 9 × 9 ?", answers: ["81", "72", "99"], correct: "81" },
-    { question: "Quel est le résultat de 49 ÷ 7 ?", answers: ["6", "7", "8"], correct: "7" },
-    { question: "Qui a développé la théorie de la relativité ?", answers: ["Einstein", "Newton", "Gauss"], correct: "Einstein" },
-    { question: "Combien font 13 + 17 ?", answers: ["30", "29", "31"], correct: "30" },
-    { question: "Quel est le résultat de 8 × 7 ?", answers: ["54", "56", "64"], correct: "56" },
-    { question: "Quel est le nom du mathématicien indien célèbre pour ses formules ?", answers: ["Ramanujan", "Gauss", "Euler"], correct: "Ramanujan" },
-    { question: "Combien font 144 ÷ 12 ?", answers: ["10", "12", "14"], correct: "12" },
-    { question: "Quel est le résultat de 100 – 37 ?", answers: ["63", "73", "67"], correct: "63" },
-    { question: "Quel est le nombre PI arrondi à 2 décimales ?", answers: ["3.14", "3.15", "3.13"], correct: "3.14" },
-    { question: "Quel mathématicien a donné son nom à une suite célèbre ?", answers: ["Fibonacci", "Pascal", "Descartes"], correct: "Fibonacci" }
+    { question: "Combien font 7 + 5 ?", answers: ["11", "12", "13"], correct: "12", difficulty: 1 },
+    { question: "Quel est le résultat de 6 × 8 ?", answers: ["42", "48", "54"], correct: "48", difficulty: 1 },
+    { question: "Combien font 36 ÷ 6 ?", answers: ["5", "6", "7"], correct: "6", difficulty: 1 },
+    { question: "Qui est considéré comme le père de la géométrie ?", answers: ["Euclide", "Pythagore", "Archimède"], correct: "Euclide", difficulty: 2 },
+    { question: "Quel est le carré de 9 ?", answers: ["18", "81", "27"], correct: "81", difficulty: 1 },
+    { question: "Quel mathématicien grec a donné son nom à un célèbre théorème sur les triangles rectangles ?", answers: ["Pythagore", "Thalès", "Eratosthène"], correct: "Pythagore", difficulty: 2 },
+    { question: "Combien font 15 – 7 ?", answers: ["8", "7", "9"], correct: "8", difficulty: 1 },
+    { question: "Quel est le résultat de 5 × 7 ?", answers: ["35", "25", "30"], correct: "35", difficulty: 1 },
+    { question: "Quel mathématicien a inventé le symbole ∞ pour l’infini ?", answers: ["Newton", "Leibniz", "John Wallis"], correct: "John Wallis", difficulty: 3 },
+    { question: "Combien font 100 ÷ 4 ?", answers: ["20", "25", "30"], correct: "25", difficulty: 1 },
+    { question: "Combien font 9 × 9 ?", answers: ["81", "72", "99"], correct: "81", difficulty: 1 },
+    { question: "Quel est le résultat de 49 ÷ 7 ?", answers: ["6", "7", "8"], correct: "7", difficulty: 1 },
+    { question: "Qui a développé la théorie de la relativité ?", answers: ["Einstein", "Newton", "Gauss"], correct: "Einstein", difficulty: 2 },
+    { question: "Combien font 13 + 17 ?", answers: ["30", "29", "31"], correct: "30", difficulty: 1 },
+    { question: "Quel est le résultat de 8 × 7 ?", answers: ["54", "56", "64"], correct: "56", difficulty: 1 },
+    { question: "Quel est le nom du mathématicien indien célèbre pour ses formules ?", answers: ["Ramanujan", "Gauss", "Euler"], correct: "Ramanujan", difficulty: 3 },
+    { question: "Combien font 144 ÷ 12 ?", answers: ["10", "12", "14"], correct: "12", difficulty: 1 },
+    { question: "Quel est le résultat de 100 – 37 ?", answers: ["63", "73", "67"], correct: "63", difficulty: 1 },
+    { question: "Quel est le nombre PI arrondi à 2 décimales ?", answers: ["3.14", "3.15", "3.13"], correct: "3.14", difficulty: 2 },
+    { question: "Quel mathématicien a donné son nom à une suite célèbre ?", answers: ["Fibonacci", "Pascal", "Descartes"], correct: "Fibonacci", difficulty: 2 }
   ],
   autres: [
-    { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant" },
-    { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa" },
-    { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium" },
-    { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie" },
-    { question: "Quel est l’animal qui pond le plus d’œufs ?", answers: ["Poule", "Poisson-lune", "Autruche"], correct: "Poisson-lune" },
-    { question: "Quel est le fruit le plus consommé au monde ?", answers: ["Banane", "Pomme", "Orange"], correct: "Banane" },
-    { question: "Quel est le plus grand lac d’eau douce ?", answers: ["Lac Baïkal", "Lac Supérieur", "Lac Victoria"], correct: "Lac Supérieur" },
-    { question: "Quel est le plus grand mammifère marin ?", answers: ["Orque", "Baleine bleue", "Dauphin"], correct: "Baleine bleue" },
-    { question: "Quel est le plus haut arbre du monde ?", answers: ["Séquoia", "Chêne", "Baobab"], correct: "Séquoia" },
-    { question: "Quel est le plus petit pays du monde ?", answers: ["Monaco", "Vatican", "Saint-Marin"], correct: "Vatican" },
-    { question: "Quel est le plus grand oiseau du monde ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche" },
-    { question: "Quel est l’instrument de musique à cordes le plus grand ?", answers: ["Contrebasse", "Guitare", "Violon"], correct: "Contrebasse" },
-    { question: "Quel est le plus grand désert froid ?", answers: ["Antarctique", "Arctique", "Gobi"], correct: "Antarctique" },
-    { question: "Quel est le plus long film d’animation Disney ?", answers: ["Fantasia", "Le Roi Lion", "La Reine des Neiges"], correct: "Fantasia" },
-    { question: "Quel est le plus grand reptile ?", answers: ["Crocodile marin", "Python", "Iguane"], correct: "Crocodile marin" },
-    { question: "Quel est le plus grand nombre premier à un chiffre ?", answers: ["7", "9", "5"], correct: "7" },
-    { question: "Quel est le plus grand océan ?", answers: ["Atlantique", "Pacifique", "Indien"], correct: "Pacifique" },
-    { question: "Quel est le plus grand insecte ?", answers: ["Phasme", "Scarabée", "Libellule"], correct: "Phasme" },
-    { question: "Quel est le plus grand félin ?", answers: ["Tigre", "Lion", "Léopard"], correct: "Tigre" },
-    { question: "Quel est le plus grand poisson ?", answers: ["Requin-baleine", "Thon", "Espadon"], correct: "Requin-baleine" }
+    { question: "Quel est le plus grand animal terrestre ?", answers: ["Éléphant", "Girafe", "Rhinocéros"], correct: "Éléphant", difficulty: 1 },
+    { question: "Quel est le plus grand volcan actif ?", answers: ["Etna", "Kilauea", "Mauna Loa"], correct: "Mauna Loa", difficulty: 2 },
+    { question: "Quel est le métal le plus léger ?", answers: ["Aluminium", "Lithium", "Fer"], correct: "Lithium", difficulty: 2 },
+    { question: "Quel est le plus grand archipel du monde ?", answers: ["Indonésie", "Philippines", "Japon"], correct: "Indonésie", difficulty: 2 },
+    { question: "Quel est l’animal qui pond le plus d’œufs ?", answers: ["Poule", "Poisson-lune", "Autruche"], correct: "Poisson-lune", difficulty: 3 },
+    { question: "Quel est le fruit le plus consommé au monde ?", answers: ["Banane", "Pomme", "Orange"], correct: "Banane", difficulty: 1 },
+    { question: "Quel est le plus grand lac d’eau douce ?", answers: ["Lac Baïkal", "Lac Supérieur", "Lac Victoria"], correct: "Lac Supérieur", difficulty: 2 },
+    { question: "Quel est le plus grand mammifère marin ?", answers: ["Orque", "Baleine bleue", "Dauphin"], correct: "Baleine bleue", difficulty: 1 },
+    { question: "Quel est le plus haut arbre du monde ?", answers: ["Séquoia", "Chêne", "Baobab"], correct: "Séquoia", difficulty: 2 },
+    { question: "Quel est le plus petit pays du monde ?", answers: ["Monaco", "Vatican", "Saint-Marin"], correct: "Vatican", difficulty: 2 },
+    { question: "Quel est le plus grand oiseau du monde ?", answers: ["Autruche", "Aigle", "Albatros"], correct: "Autruche", difficulty: 1 },
+    { question: "Quel est l’instrument de musique à cordes le plus grand ?", answers: ["Contrebasse", "Guitare", "Violon"], correct: "Contrebasse", difficulty: 2 },
+    { question: "Quel est le plus grand désert froid ?", answers: ["Antarctique", "Arctique", "Gobi"], correct: "Antarctique", difficulty: 2 },
+    { question: "Quel est le plus long film d’animation Disney ?", answers: ["Fantasia", "Le Roi Lion", "La Reine des Neiges"], correct: "Fantasia", difficulty: 3 },
+    { question: "Quel est le plus grand reptile ?", answers: ["Crocodile marin", "Python", "Iguane"], correct: "Crocodile marin", difficulty: 2 },
+    { question: "Quel est le plus grand nombre premier à un chiffre ?", answers: ["7", "9", "5"], correct: "7", difficulty: 1 },
+    { question: "Quel est le plus grand océan ?", answers: ["Atlantique", "Pacifique", "Indien"], correct: "Pacifique", difficulty: 1 },
+    { question: "Quel est le plus grand insecte ?", answers: ["Phasme", "Scarabée", "Libellule"], correct: "Phasme", difficulty: 2 },
+    { question: "Quel est le plus grand félin ?", answers: ["Tigre", "Lion", "Léopard"], correct: "Tigre", difficulty: 1 },
+    { question: "Quel est le plus grand poisson ?", answers: ["Requin-baleine", "Thon", "Espadon"], correct: "Requin-baleine", difficulty: 2 }
+  ],
+  capitale: [
+    { question: "Quelle est la capitale de la France ?", answers: ["Paris", "Lyon", "Marseille"], correct: "Paris", difficulty: 1 },
+    { question: "Quelle est la capitale de l’Italie ?", answers: ["Rome", "Milan", "Venise"], correct: "Rome", difficulty: 1 },
+    { question: "Quelle est la capitale de l’Espagne ?", answers: ["Madrid", "Barcelone", "Séville"], correct: "Madrid", difficulty: 1 },
+    { question: "Quelle est la capitale du Canada ?", answers: ["Toronto", "Ottawa", "Vancouver"], correct: "Ottawa", difficulty: 2 },
+    { question: "Quelle est la capitale du Japon ?", answers: ["Tokyo", "Kyoto", "Osaka"], correct: "Tokyo", difficulty: 1 },
+    { question: "Quelle est la capitale de l’Australie ?", answers: ["Sydney", "Melbourne", "Canberra"], correct: "Canberra", difficulty: 2 },
+    { question: "Quelle est la capitale du Brésil ?", answers: ["Rio de Janeiro", "Brasilia", "São Paulo"], correct: "Brasilia", difficulty: 2 },
+    { question: "Quelle est la capitale de la Russie ?", answers: ["Moscou", "Saint-Pétersbourg", "Kiev"], correct: "Moscou", difficulty: 1 },
+    { question: "Quelle est la capitale de l’Allemagne ?", answers: ["Berlin", "Munich", "Francfort"], correct: "Berlin", difficulty: 1 },
+    { question: "Quelle est la capitale de la Turquie ?", answers: ["Istanbul", "Ankara", "Izmir"], correct: "Ankara", difficulty: 2 },
+    { question: "Quelle est la capitale du Kazakhstan ?", answers: ["Astana", "Almaty", "Tachkent"], correct: "Astana", difficulty: 3 },
+    { question: "Quelle est la capitale de la Mongolie ?", answers: ["Oulan-Bator", "Hanoï", "Pékin"], correct: "Oulan-Bator", difficulty: 3 },
+    { question: "Quelle est la capitale du Mozambique ?", answers: ["Maputo", "Lusaka", "Harare"], correct: "Maputo", difficulty: 3 },
+    { question: "Quelle est la capitale du Sri Lanka ?", answers: ["Colombo", "Kandy", "Dacca"], correct: "Colombo", difficulty: 3 },
+    { question: "Quelle est la capitale du Bhoutan ?", answers: ["Thimphou", "Katmandou", "Dacca"], correct: "Thimphou", difficulty: 3 },
+    { question: "Quelle est la capitale du Suriname ?", answers: ["Paramaribo", "Georgetown", "Cayenne"], correct: "Paramaribo", difficulty: 3 },
+    { question: "Quelle est la capitale de la Papouasie-Nouvelle-Guinée ?", answers: ["Port Moresby", "Suva", "Honiara"], correct: "Port Moresby", difficulty: 3 },
+    { question: "Quelle est la capitale du Lesotho ?", answers: ["Maseru", "Mbabane", "Gaborone"], correct: "Maseru", difficulty: 3 },
+    { question: "Quelle est la capitale du Tadjikistan ?", answers: ["Douchanbé", "Achgabat", "Bichkek"], correct: "Douchanbé", difficulty: 3 },
+    { question: "Quelle est la capitale de la Micronésie ?", answers: ["Palikir", "Majuro", "Hagåtña"], correct: "Palikir", difficulty: 3 }
   ]
 };
 
@@ -500,6 +522,7 @@ function getRandomQuestions(arr, n) {
 const questions = getRandomQuestions(allQuestions, 10);
 let score = 0;
 let current = 0;
+let currentDifficulty = 1; // Commence facile
 const scoreboard = document.getElementById('scoreboard');
 const quizDiv = document.createElement('div');
 document.body.insertBefore(quizDiv, document.getElementById('restart'));
@@ -560,14 +583,30 @@ function showQuestion() {
     showFinalScore();
     return;
   }
-  const q = questions[current];
+
+  // Filtre les questions du niveau de difficulté courant
+  let available = questions.filter(q => q.difficulty === currentDifficulty && !userAnswers.some(a => a.question === q.question));
+  // Si aucune question à ce niveau, prend niveau suivant ou précédent
+  if (available.length === 0) {
+    available = questions.filter(q => !userAnswers.some(a => a.question === q.question));
+    if (available.length === 0) {
+      showFinalScore();
+      return;
+    }
+  }
+  // Prend une question au hasard dans le niveau courant
+  const q = available[Math.floor(Math.random() * available.length)];
+  const difficultyLabels = ["Facile", "Moyen", "Difficile"];
   const questionPosition = `<div style="text-align:right;color:var(--accent);font-size:1em;margin-bottom:6px;">
-  Question ${current + 1} / ${questions.length}
+  Question ${userAnswers.length + 1} / ${questions.length} <span style="margin-left:10px;font-size:0.95em;color:var(--secondary);">Niveau : ${difficultyLabels[currentDifficulty-1]}</span>
 </div>`;
   quizDiv.innerHTML = `
     <div class="card">
       ${questionPosition}
       <div class="question">${q.question}</div>
+      <div style="color:var(--secondary);font-size:1.05em;margin-bottom:8px;">
+        Difficulté : <b>${difficultyLabels[q.difficulty-1]}</b>
+      </div>
       <div class="answers">
         ${q.answers.map(ans => `<button tabindex="0">${ans}</button>`).join('')}
       </div>
